@@ -1,469 +1,1598 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Aditya's Personal Portfolio</title>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Aditya Mishra — DevSecOps Command Center</title>
+<meta name="description" content="Aditya Mishra — DevSecOps Trainee at TCS. Full-stack developer transitioning into DevSecOps, Cloud Security, and Platform Engineering. Explore live pipeline, security dashboard, tech radar and case studies.">
+<meta property="og:title" content="Aditya Mishra — DevSecOps Command Center">
+<meta property="og:description" content="DevSecOps Trainee at TCS building secure, scalable systems. Full-stack roots, cloud &amp; security focus.">
+<meta property="og:type" content="website">
+<link rel="shortcut icon" href="./assets/images/logo.svg" type="image/x-icon">
 
-  <!-- favicon -->
-  <link rel="shortcut icon" href="./assets/images/logo.svg" type="image/x-icon">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 
-  <!-- custom css -->
-  <link rel="stylesheet" href="./assets/css/style.css">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Person",
+  "name": "Aditya Mishra",
+  "jobTitle": "DevSecOps Trainee",
+  "worksFor": {"@type":"Organization","name":"Tata Consultancy Services"},
+  "url": "https://github.com/Aditya-0411",
+  "sameAs": ["https://github.com/Aditya-0411","https://www.linkedin.com/in/aditya-mishra0411/"],
+  "address": {"@type":"PostalAddress","addressLocality":"Pune","addressRegion":"Maharashtra","addressCountry":"IN"}
+}
+</script>
 
-  <!-- google font -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+/* ============================================================
+   TOKENS
+   ============================================================ */
+:root{
+  --bg:            #0a0e13;
+  --bg-raised:     #10161d;
+  --surface:       #141b23;
+  --surface-2:     #1a232c;
+  --line:          #22303c;
+  --line-soft:     #1b2530;
+  --text:          #e6edf3;
+  --text-dim:      #8b98a5;
+  --text-faint:    #5c6b78;
+  --accent:        #34e0a1;      /* pass / secure */
+  --accent-dim:    #1d8f6a;
+  --accent-2:      #ffb454;      /* warning / in-progress */
+  --accent-3:      #5b8cff;      /* info / link */
+  --danger:        #ff6b6b;      /* fail / risk */
+
+  --font-display:  "Space Grotesk", sans-serif;
+  --font-body:      "Inter", sans-serif;
+  --font-mono:      "JetBrains Mono", monospace;
+
+  --radius: 10px;
+  --radius-sm: 6px;
+  --sidebar-w: 300px;
+  --dock-w: 84px;
+  --shadow-soft: 0 8px 30px -12px rgba(0,0,0,.6);
+}
+
+*{box-sizing:border-box; margin:0; padding:0;}
+html{scroll-behavior:smooth;}
+body{
+  background:var(--bg);
+  color:var(--text);
+  font-family:var(--font-body);
+  line-height:1.6;
+  -webkit-font-smoothing:antialiased;
+  overflow-x:hidden;
+}
+img{display:block; max-width:100%;}
+a{color:inherit; text-decoration:none;}
+ul,ol{list-style:none;}
+button{font:inherit; background:none; border:none; color:inherit; cursor:pointer;}
+::selection{background:var(--accent); color:#03110b;}
+
+body::before{
+  content:"";
+  position:fixed; inset:0; z-index:-2;
+  background-image:
+    linear-gradient(var(--line-soft) 1px, transparent 1px),
+    linear-gradient(90deg, var(--line-soft) 1px, transparent 1px);
+  background-size:64px 64px;
+  opacity:.35;
+  mask-image:radial-gradient(circle at 20% 0%, rgba(0,0,0,.9), transparent 70%);
+}
+body::after{
+  content:"";
+  position:fixed; inset:0; z-index:-1;
+  background:radial-gradient(600px 400px at 85% -5%, rgba(52,224,161,.10), transparent 60%),
+             radial-gradient(500px 400px at 0% 100%, rgba(91,140,255,.08), transparent 60%);
+}
+
+:focus-visible{outline:2px solid var(--accent); outline-offset:3px; border-radius:4px;}
+@media (prefers-reduced-motion: reduce){
+  *{animation-duration:.001ms !important; transition-duration:.001ms !important;}
+}
+
+.eyebrow{
+  display:flex; align-items:center; gap:.6rem;
+  font-family:var(--font-mono); font-size:.78rem; color:var(--accent); letter-spacing:.02em; margin-bottom:.9rem;
+}
+.eyebrow::before{content:"❯"; color:var(--text-faint);}
+.eyebrow .blink{animation:blink 1.1s steps(1) infinite;}
+@keyframes blink{50%{opacity:0;}}
+
+h1,h2,h3,h4,h5{font-family:var(--font-display); font-weight:600; letter-spacing:-.01em;}
+.h2{font-size:clamp(1.5rem,2.4vw,1.9rem); color:var(--text); margin-bottom:.5rem; position:relative; padding-bottom:.7rem;}
+.h2::after{content:""; position:absolute; left:0; bottom:0; width:38px; height:3px; background:linear-gradient(90deg,var(--accent),var(--accent-3)); border-radius:2px;}
+.h2-lede{color:var(--text-dim); font-size:.92rem; max-width:60ch; margin-bottom:2rem;}
+.h3{font-size:1.05rem; color:var(--text); margin-bottom:1.1rem;}
+.block{margin-bottom:3rem;}
+.block:last-child{margin-bottom:0;}
+
+/* status pills used everywhere */
+.status-pill{
+  font-family:var(--font-mono); font-size:.65rem; text-transform:uppercase; letter-spacing:.05em;
+  padding:.22rem .6rem; border-radius:99px; border:1px solid var(--line); display:inline-flex; align-items:center; gap:.4rem;
+}
+.status-pill .sdot{width:6px; height:6px; border-radius:50%;}
+.status-pill.pass{color:var(--accent); border-color:rgba(52,224,161,.35); background:rgba(52,224,161,.07);}
+.status-pill.pass .sdot{background:var(--accent);}
+.status-pill.warn{color:var(--accent-2); border-color:rgba(255,180,84,.35); background:rgba(255,180,84,.07);}
+.status-pill.warn .sdot{background:var(--accent-2);}
+.status-pill.info{color:var(--accent-3); border-color:rgba(91,140,255,.35); background:rgba(91,140,255,.07);}
+.status-pill.info .sdot{background:var(--accent-3);}
+.status-pill.idle{color:var(--text-faint);}
+.status-pill.idle .sdot{background:var(--text-faint);}
+
+/* ============================================================
+   LAYOUT SHELL
+   ============================================================ */
+.app{display:grid; grid-template-columns: var(--sidebar-w) var(--dock-w) 1fr; min-height:100vh;}
+
+/* ---------- SIDEBAR ---------- */
+.sidebar{
+  position:sticky; top:0; height:100vh; padding:2rem 1.5rem;
+  background:linear-gradient(180deg,var(--bg-raised),var(--bg));
+  border-right:1px solid var(--line);
+  display:flex; flex-direction:column; gap:1.3rem; overflow-y:auto;
+}
+.avatar-wrap{position:relative; width:80px; height:80px;}
+.avatar-wrap img, .avatar-fallback{width:80px; height:80px; border-radius:50%; object-fit:cover; border:2px solid var(--line);}
+.avatar-fallback{display:none; align-items:center; justify-content:center; background:linear-gradient(135deg,var(--accent-dim),var(--accent-3)); font-family:var(--font-display); font-weight:700; font-size:1.4rem; color:#03110b;}
+.status-dot{position:absolute; bottom:-2px; right:-2px; width:15px; height:15px; border-radius:50%; background:var(--accent); border:3px solid var(--bg-raised); box-shadow:0 0 0 0 rgba(52,224,161,.6); animation:pulse 2s infinite;}
+@keyframes pulse{0%{box-shadow:0 0 0 0 rgba(52,224,161,.55);} 70%{box-shadow:0 0 0 8px rgba(52,224,161,0);} 100%{box-shadow:0 0 0 0 rgba(52,224,161,0);}}
+.identity h1{font-size:1.22rem; color:var(--text); margin-bottom:.15rem;}
+.role-tag{font-family:var(--font-mono); font-size:.78rem; color:var(--accent); display:flex; align-items:center; gap:.4rem;}
+.role-tag .cursor{animation:blink 1s steps(1) infinite;}
+.avail-pill{margin-top:.65rem; display:inline-flex; align-items:center; gap:.45rem; font-family:var(--font-mono); font-size:.68rem; color:var(--text-dim); border:1px solid var(--line); border-radius:99px; padding:.3rem .65rem;}
+.avail-pill .dot{width:6px; height:6px; border-radius:50%; background:var(--accent);}
+
+.sidebar-section{border-top:1px solid var(--line); padding-top:1.1rem;}
+.sidebar-section .label{font-family:var(--font-mono); font-size:.66rem; color:var(--text-faint); text-transform:uppercase; letter-spacing:.08em; margin-bottom:.75rem;}
+.contact-row{display:flex; align-items:flex-start; gap:.65rem; font-size:.82rem; margin-bottom:.8rem;}
+.contact-row:last-child{margin-bottom:0;}
+.contact-row .ic{width:28px; height:28px; flex:none; border-radius:8px; display:flex; align-items:center; justify-content:center; background:var(--surface); border:1px solid var(--line); color:var(--accent);}
+.contact-row .ic svg{width:14px; height:14px;}
+.contact-row .meta p{color:var(--text-faint); font-size:.66rem; font-family:var(--font-mono); text-transform:uppercase; letter-spacing:.05em;}
+.contact-row .meta a, .contact-row .meta span{color:var(--text-dim); word-break:break-word; font-size:.82rem;}
+.contact-row .meta a:hover{color:var(--accent);}
+.social-row{display:flex; gap:.55rem;}
+.social-row a{width:34px; height:34px; border-radius:8px; display:flex; align-items:center; justify-content:center; background:var(--surface); border:1px solid var(--line); transition:.2s;}
+.social-row a:hover{border-color:var(--accent); color:var(--accent); transform:translateY(-2px);}
+.social-row svg{width:15px; height:15px;}
+.resume-dl{
+  display:flex; align-items:center; justify-content:center; gap:.5rem; width:100%;
+  font-family:var(--font-mono); font-size:.74rem; padding:.65rem .8rem; border-radius:var(--radius-sm);
+  background:var(--accent); color:#03110b; font-weight:600; transition:.2s;
+}
+.resume-dl:hover{transform:translateY(-2px); box-shadow:0 10px 20px -8px rgba(52,224,161,.4);}
+.resume-dl svg{width:14px; height:14px;}
+.sidebar-footer{margin-top:auto; font-family:var(--font-mono); font-size:.66rem; color:var(--text-faint); border-top:1px solid var(--line); padding-top:.9rem; line-height:1.8;}
+.sidebar-footer b{color:var(--accent); font-weight:500;}
+
+/* ---------- DOCK ---------- */
+.dock{position:sticky; top:0; height:100vh; background:var(--bg); border-right:1px solid var(--line); display:flex; flex-direction:column; align-items:center; padding:1.6rem 0; gap:.3rem;}
+.dock-btn{width:56px; height:54px; border-radius:12px; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:.22rem; color:var(--text-faint); transition:.2s; position:relative;}
+.dock-btn svg{width:18px; height:18px;}
+.dock-btn span{font-family:var(--font-mono); font-size:.56rem; letter-spacing:.02em;}
+.dock-btn:hover{color:var(--text); background:var(--surface);}
+.dock-btn.active{color:var(--accent); background:var(--surface);}
+.dock-btn.active::before{content:""; position:absolute; left:-1px; top:9px; bottom:9px; width:2px; background:var(--accent); border-radius:2px;}
+
+/* ---------- CONTENT ---------- */
+.content{padding:2.2rem 3rem 5rem; max-width:1020px;}
+.page{display:none; animation:fadein .5s ease both;}
+.page.active{display:block;}
+@keyframes fadein{from{opacity:0; transform:translateY(8px);} to{opacity:1; transform:translateY(0);}}
+
+.topbar, .bottom-nav{display:none;}
+
+/* ============================================================
+   STATUS STRIP (persistent, top of every page)
+   ============================================================ */
+.status-strip{
+  display:flex; flex-wrap:wrap; gap:.6rem; align-items:center;
+  border:1px solid var(--line); border-radius:99px; padding:.55rem .9rem; margin-bottom:2.2rem;
+  background:var(--surface); font-family:var(--font-mono); font-size:.7rem; color:var(--text-dim);
+}
+.status-strip .sep{width:1px; height:12px; background:var(--line);}
+
+/* ============================================================
+   HERO / COMMAND CENTER
+   ============================================================ */
+.hero{display:grid; grid-template-columns:1.05fr .95fr; gap:1.6rem; margin-bottom:2.4rem; align-items:stretch;}
+.terminal{background:var(--surface); border:1px solid var(--line); border-radius:var(--radius); box-shadow:var(--shadow-soft); overflow:hidden; display:flex; flex-direction:column;}
+.terminal-bar{display:flex; align-items:center; gap:.5rem; padding:.65rem .9rem; background:var(--surface-2); border-bottom:1px solid var(--line);}
+.terminal-bar .tdot{width:9px; height:9px; border-radius:50%;}
+.tdot.r{background:#ff5f57;} .tdot.y{background:#febc2e;} .tdot.g{background:#28c840;}
+.terminal-bar .tname{margin-left:.5rem; font-family:var(--font-mono); font-size:.7rem; color:var(--text-faint);}
+.terminal-hint{margin-left:auto; font-family:var(--font-mono); font-size:.62rem; color:var(--text-faint);}
+.terminal-body{padding:1rem 1.1rem; font-family:var(--font-mono); font-size:.82rem; color:var(--text-dim); flex:1; min-height:230px; max-height:340px; overflow-y:auto;}
+.terminal-body .ln{margin-bottom:.5rem; white-space:pre-wrap; word-break:break-word;}
+.terminal-body .prompt{color:var(--accent);}
+.terminal-body .path{color:var(--accent-3);}
+.terminal-body .out{color:var(--text-dim); display:block;}
+.terminal-body .out b{color:var(--text);}
+.terminal-body .out .k{color:var(--accent-3);}
+.terminal-input-row{display:flex; align-items:center; gap:.5rem; padding:.7rem 1.1rem; border-top:1px solid var(--line); background:var(--surface-2);}
+.terminal-input-row .prompt{color:var(--accent); font-family:var(--font-mono); font-size:.82rem;}
+.terminal-input{flex:1; background:none; border:none; color:var(--text); font-family:var(--font-mono); font-size:.82rem; outline:none;}
+.tcaret{display:inline-block; width:7px; height:1.05em; background:var(--accent); vertical-align:-2px; animation:blink 1s steps(1) infinite;}
+
+.hero-side{background:var(--surface); border:1px solid var(--line); border-radius:var(--radius); padding:1.4rem; display:flex; flex-direction:column; justify-content:space-between; gap:1.1rem; box-shadow:var(--shadow-soft);}
+.hero-side .tag{font-family:var(--font-mono); font-size:.68rem; color:var(--text-faint); text-transform:uppercase; letter-spacing:.06em;}
+.stat-grid{display:grid; grid-template-columns:1fr 1fr; gap:.8rem;}
+.stat{border:1px solid var(--line); border-radius:var(--radius-sm); padding:.75rem .85rem; background:var(--bg-raised);}
+.stat b{display:block; font-family:var(--font-display); font-size:1.3rem; color:var(--accent);}
+.stat span{font-size:.68rem; color:var(--text-faint);}
+
+/* mission + why hire me */
+.mission-grid, .whyhire-grid{display:grid; grid-template-columns:1fr 1fr; gap:.8rem;}
+.mission-item, .whyhire-item{
+  border:1px solid var(--line); border-radius:var(--radius-sm); padding:.85rem 1rem; background:var(--surface);
+  display:flex; align-items:flex-start; gap:.65rem; font-size:.85rem; color:var(--text-dim); transition:.2s;
+}
+.mission-item:hover, .whyhire-item:hover{border-color:var(--accent); background:var(--surface-2);}
+.mission-item .mdot{width:7px; height:7px; border-radius:50%; background:var(--accent-2); margin-top:.4rem; flex:none; animation:pulse2 2s infinite;}
+@keyframes pulse2{0%,100%{opacity:1;} 50%{opacity:.35;}}
+.whyhire-item svg{width:16px; height:16px; color:var(--accent); flex:none; margin-top:.15rem;}
+@media(max-width:700px){.mission-grid,.whyhire-grid{grid-template-columns:1fr;}}
+
+/* ---- capability pipeline (about page, kept) ---- */
+.pipeline{position:relative;}
+.pipeline-track{display:grid; grid-template-columns:repeat(4,1fr); gap:1rem; position:relative;}
+.pipeline-track::before{content:""; position:absolute; top:26px; left:5%; right:5%; height:2px; background:repeating-linear-gradient(90deg,var(--line) 0 8px, transparent 8px 14px); z-index:0;}
+.stage{position:relative; z-index:1; background:var(--surface); border:1px solid var(--line); border-radius:var(--radius); padding:1.2rem 1rem; transition:.25s;}
+.stage:hover{border-color:var(--accent); transform:translateY(-4px); box-shadow:var(--shadow-soft);}
+.stage-node{width:36px; height:36px; border-radius:9px; margin-bottom:.8rem; display:flex; align-items:center; justify-content:center; background:var(--bg-raised); border:1px solid var(--line); color:var(--accent);}
+.stage-node svg{width:17px; height:17px;}
+.stage h4{font-size:.9rem; margin-bottom:.35rem; color:var(--text);}
+.stage p{font-size:.78rem; color:var(--text-faint); line-height:1.5;}
+
+/* ============================================================
+   OPS PAGE — PIPELINE VISUALIZER
+   ============================================================ */
+.cd-pipeline{display:flex; flex-direction:column; gap:0; border:1px solid var(--line); border-radius:var(--radius); background:var(--surface); padding:1.4rem 1.4rem 1.6rem; overflow-x:auto;}
+.cd-row{display:flex; align-items:center; gap:0; min-width:max-content;}
+.cd-step{
+  display:flex; flex-direction:column; align-items:center; gap:.5rem; width:118px; text-align:center; opacity:.35; transition:opacity .4s;
+}
+.cd-step.on{opacity:1;}
+.cd-node{width:44px; height:44px; border-radius:12px; border:1px solid var(--line); background:var(--bg-raised); display:flex; align-items:center; justify-content:center; color:var(--text-faint); transition:.3s; position:relative;}
+.cd-step.on .cd-node{border-color:var(--accent); color:var(--accent); box-shadow:0 0 0 3px rgba(52,224,161,.12);}
+.cd-node svg{width:19px; height:19px;}
+.cd-check{position:absolute; top:-6px; right:-6px; width:16px; height:16px; border-radius:50%; background:var(--accent); color:#03110b; display:flex; align-items:center; justify-content:center; opacity:0; transform:scale(.4); transition:.3s;}
+.cd-step.on .cd-check{opacity:1; transform:scale(1);}
+.cd-check svg{width:9px; height:9px;}
+.cd-step small{font-family:var(--font-mono); font-size:.66rem; color:var(--text-dim); line-height:1.3;}
+.cd-connector{width:34px; height:2px; background:var(--line); position:relative; flex:none;}
+.cd-connector::after{content:""; position:absolute; inset:0; background:var(--accent); width:0%; transition:width .4s;}
+.cd-connector.on::after{width:100%;}
+.cd-replay{margin-top:1.2rem; display:inline-flex; align-items:center; gap:.5rem; font-family:var(--font-mono); font-size:.75rem; color:var(--accent); border:1px solid var(--line); border-radius:99px; padding:.5rem 1rem; transition:.2s;}
+.cd-replay:hover{border-color:var(--accent); background:var(--surface-2);}
+.cd-replay svg{width:13px; height:13px;}
+@media(max-width:980px){.cd-row{flex-direction:column; align-items:flex-start;} .cd-step{width:auto; flex-direction:row; text-align:left;} .cd-connector{width:2px; height:22px; margin-left:22px;}}
+
+/* SECURITY DASHBOARD */
+.sec-grid{display:grid; grid-template-columns:repeat(4,1fr); gap:1rem;}
+.sec-tile{border:1px solid var(--line); border-radius:var(--radius); background:var(--surface); padding:1.1rem 1.1rem; transition:.2s;}
+.sec-tile:hover{border-color:var(--accent); background:var(--surface-2);}
+.sec-tile .sec-top{display:flex; align-items:center; justify-content:space-between; margin-bottom:.7rem;}
+.sec-tile .sec-icon{width:30px; height:30px; border-radius:8px; background:var(--bg-raised); border:1px solid var(--line); display:flex; align-items:center; justify-content:center; color:var(--accent);}
+.sec-tile .sec-icon svg{width:14px; height:14px;}
+.sec-tile h4{font-size:.82rem; color:var(--text); margin-bottom:.5rem;}
+.score-ring{position:relative; width:64px; height:64px; margin:0 auto .5rem;}
+.score-ring svg{transform:rotate(-90deg);}
+.score-ring .bgring{stroke:var(--line);}
+.score-ring .fgring{stroke:var(--accent); stroke-linecap:round; transition:stroke-dashoffset 1.4s cubic-bezier(.2,.7,.2,1);}
+.score-ring .score-num{position:absolute; inset:0; display:flex; align-items:center; justify-content:center; font-family:var(--font-display); font-size:1.05rem; color:var(--text);}
+@media(max-width:980px){.sec-grid{grid-template-columns:repeat(2,1fr);}}
+@media(max-width:560px){.sec-grid{grid-template-columns:1fr 1fr;}}
+
+/* CLOUD ARCHITECTURE */
+.arch-stack{display:flex; flex-direction:column; gap:.7rem;}
+.arch-layer{display:flex; align-items:center; gap:1rem; border:1px solid var(--line); border-radius:var(--radius-sm); background:var(--surface); padding:.9rem 1.1rem; transition:.2s;}
+.arch-layer:hover{border-color:var(--accent-3); background:var(--surface-2);}
+.arch-layer .arch-icon{width:36px; height:36px; border-radius:9px; background:var(--bg-raised); border:1px solid var(--line); display:flex; align-items:center; justify-content:center; color:var(--accent-3); flex:none;}
+.arch-layer .arch-icon svg{width:16px; height:16px;}
+.arch-layer .arch-meta p{font-family:var(--font-mono); font-size:.65rem; color:var(--text-faint); text-transform:uppercase; letter-spacing:.05em; margin-bottom:.15rem;}
+.arch-layer .arch-meta span{font-size:.87rem; color:var(--text);}
+.arch-arrow{align-self:center; color:var(--text-faint); font-size:.7rem; margin-left:2.7rem;}
+
+/* ============================================================
+   RADAR PAGE — TECH RADAR / CERTS / ROADMAP / ACHIEVEMENTS
+   ============================================================ */
+.radar-layout{display:grid; grid-template-columns:340px 1fr; gap:2.2rem; align-items:start;}
+.radar-wrap{position:relative; width:320px; height:320px; margin:0 auto;}
+.radar-label{position:absolute; transform:translate(-50%,-50%); font-family:var(--font-mono); font-size:.66rem; color:var(--text-dim); text-align:center; white-space:nowrap;}
+.radar-label b{display:block; color:var(--accent); font-size:.7rem;}
+.chip-cluster{display:flex; flex-wrap:wrap; gap:.5rem;}
+.chip-group{margin-bottom:1.3rem;}
+.chip-group:last-child{margin-bottom:0;}
+.chip-group p{font-family:var(--font-mono); font-size:.68rem; color:var(--text-faint); text-transform:uppercase; letter-spacing:.06em; margin-bottom:.5rem;}
+.chip{font-family:var(--font-mono); font-size:.74rem; color:var(--text-dim); border:1px solid var(--line); border-radius:99px; padding:.38rem .8rem; display:inline-flex; align-items:center; gap:.4rem; background:var(--surface); transition:.2s;}
+.chip:hover{border-color:var(--accent); color:var(--text);}
+.chip .sq{width:6px; height:6px; border-radius:2px; background:var(--accent-2);}
+.chip.sec .sq{background:var(--accent);}
+.chip.agile .sq{background:var(--accent-3);}
+@media(max-width:900px){.radar-layout{grid-template-columns:1fr;}}
+
+.cert-grid{display:grid; grid-template-columns:repeat(2,1fr); gap:.9rem;}
+.cert-card{border:1px solid var(--line); border-radius:var(--radius-sm); background:var(--surface); padding:1rem 1.1rem; display:flex; align-items:center; gap:.8rem; transition:.2s;}
+.cert-card:hover{border-color:var(--accent-2); background:var(--surface-2);}
+.cert-card .cert-icon{width:34px; height:34px; border-radius:9px; background:var(--bg-raised); border:1px solid var(--line); display:flex; align-items:center; justify-content:center; color:var(--accent-2); flex:none;}
+.cert-card .cert-icon svg{width:16px; height:16px;}
+.cert-card h5{font-size:.87rem; color:var(--text); margin-bottom:.3rem;}
+@media(max-width:700px){.cert-grid{grid-template-columns:1fr;}}
+
+.roadmap-list{border-left:1px solid var(--line); margin-left:6px;}
+.rm-item{position:relative; padding:0 0 1.5rem 1.8rem;}
+.rm-item:last-child{padding-bottom:0;}
+.rm-item::before{content:""; position:absolute; left:-6px; top:3px; width:11px; height:11px; border-radius:50%; background:var(--bg); border:2px solid var(--text-faint);}
+.rm-item.done::before{background:var(--accent); border-color:var(--accent);}
+.rm-item.now::before{background:var(--accent-2); border-color:var(--accent-2); box-shadow:0 0 0 4px rgba(255,180,84,.15);}
+.rm-item h4{font-size:.95rem; color:var(--text); margin-bottom:.2rem;}
+.rm-item p{font-size:.82rem; color:var(--text-faint);}
+
+.ach-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:1rem;}
+.ach-card{border:1px solid var(--line); border-radius:var(--radius); background:var(--surface); padding:1.1rem; text-align:center; transition:.2s;}
+.ach-card:hover{border-color:var(--accent); background:var(--surface-2); transform:translateY(-3px);}
+.ach-card b{display:block; font-family:var(--font-display); font-size:1.6rem; color:var(--accent);}
+.ach-card span{font-size:.72rem; color:var(--text-faint);}
+@media(max-width:700px){.ach-grid{grid-template-columns:1fr 1fr;}}
+
+/* GitHub command center */
+.gh-panel{border:1px solid var(--line); border-radius:var(--radius); background:var(--surface); padding:1.3rem 1.4rem;}
+.gh-head{display:flex; align-items:center; gap:.8rem; margin-bottom:1.1rem;}
+.gh-head svg{width:22px; height:22px; color:var(--text);}
+.gh-head a{font-family:var(--font-mono); font-size:.78rem; color:var(--accent-3);}
+.gh-stat-row{display:grid; grid-template-columns:repeat(4,1fr); gap:.8rem; margin-bottom:1.2rem;}
+.gh-stat{border:1px solid var(--line); border-radius:var(--radius-sm); padding:.7rem; text-align:center; background:var(--bg-raised);}
+.gh-stat b{display:block; font-family:var(--font-display); font-size:1.2rem; color:var(--text);}
+.gh-stat span{font-size:.65rem; color:var(--text-faint);}
+.gh-repos{display:flex; flex-direction:column; gap:.6rem;}
+.gh-repo{display:flex; justify-content:space-between; align-items:center; gap:.8rem; border:1px solid var(--line); border-radius:var(--radius-sm); padding:.7rem .9rem; font-size:.82rem;}
+.gh-repo a{color:var(--text);}
+.gh-repo a:hover{color:var(--accent);}
+.gh-repo .gh-meta{font-family:var(--font-mono); font-size:.7rem; color:var(--text-faint); display:flex; gap:.7rem; flex:none;}
+.gh-note{font-family:var(--font-mono); font-size:.72rem; color:var(--text-faint); margin-top:.8rem;}
+@media(max-width:700px){.gh-stat-row{grid-template-columns:1fr 1fr;}}
+
+/* ============================================================
+   RESUME (kept)
+   ============================================================ */
+.timeline{margin-bottom:2.6rem;}
+.timeline-list{border-left:1px solid var(--line); margin-left:6px;}
+.t-item{position:relative; padding:0 0 1.7rem 1.8rem;}
+.t-item:last-child{padding-bottom:0;}
+.t-item::before{content:""; position:absolute; left:-6px; top:4px; width:11px; height:11px; border-radius:50%; background:var(--bg); border:2px solid var(--accent);}
+.t-item.current::before{background:var(--accent); box-shadow:0 0 0 4px rgba(52,224,161,.15);}
+.t-head{display:flex; flex-wrap:wrap; align-items:baseline; gap:.6rem; margin-bottom:.15rem;}
+.t-head h4{font-size:1rem; color:var(--text);}
+.t-org{font-size:.85rem; color:var(--accent-3);}
+.t-period{font-family:var(--font-mono); font-size:.7rem; color:var(--text-faint); border:1px solid var(--line); border-radius:99px; padding:.15rem .6rem; margin-left:auto;}
+.t-item.current .t-period{color:var(--accent); border-color:var(--accent-dim);}
+.t-list{margin-top:.6rem; padding-left:0;}
+.t-list li{font-size:.86rem; color:var(--text-dim); padding-left:1.1rem; position:relative; margin-bottom:.4rem;}
+.t-list li::before{content:"›"; position:absolute; left:0; color:var(--accent);}
+.t-note{font-size:.86rem; color:var(--text-dim); margin-top:.4rem;}
+
+.skills-block{margin-bottom:2rem;}
+.meter-grid{display:grid; grid-template-columns:1fr 1fr; gap:1rem 1.6rem;}
+.meter .m-head{display:flex; justify-content:space-between; font-size:.83rem; margin-bottom:.4rem;}
+.meter .m-head b{font-family:var(--font-mono); color:var(--accent); font-weight:500;}
+.meter-bg{height:6px; background:var(--surface-2); border-radius:99px; overflow:hidden; border:1px solid var(--line);}
+.meter-fill{height:100%; border-radius:99px; background:linear-gradient(90deg,var(--accent-dim),var(--accent)); width:0; transition:width 1.2s cubic-bezier(.2,.7,.2,1);}
+
+/* ============================================================
+   WORK / CASE STUDIES
+   ============================================================ */
+.filter-list{display:flex; flex-wrap:wrap; gap:.6rem; margin-bottom:1.8rem;}
+.filter-list button{font-family:var(--font-mono); font-size:.78rem; color:var(--text-dim); border:1px solid var(--line); border-radius:99px; padding:.5rem 1.1rem; transition:.2s;}
+.filter-list button.active{background:var(--accent); color:#03110b; border-color:var(--accent);}
+.filter-list button:not(.active):hover{border-color:var(--accent); color:var(--text);}
+
+.project-list{display:grid; grid-template-columns:repeat(2,1fr); gap:1.3rem;}
+.project-item{display:none;}
+.project-item.show{display:block; animation:fadein .4s ease both;}
+.p-card{border:1px solid var(--line); border-radius:var(--radius); overflow:hidden; background:var(--surface); transition:.25s; height:100%;}
+.p-card:hover{border-color:var(--accent);}
+.p-img{position:relative; aspect-ratio:16/10; background:var(--surface-2); overflow:hidden; display:block;}
+.p-img img{width:100%; height:100%; object-fit:cover; transition:.4s;}
+.p-card:hover .p-img img{transform:scale(1.06);}
+.p-fallback{display:none; position:absolute; inset:0; align-items:center; justify-content:center; font-family:var(--font-display); font-size:1.8rem; color:var(--text-faint); background:linear-gradient(135deg,var(--surface-2),var(--bg-raised));}
+.p-badge{position:absolute; top:.7rem; right:.7rem; width:32px; height:32px; border-radius:8px; background:rgba(10,14,19,.75); backdrop-filter:blur(4px); border:1px solid var(--line); display:flex; align-items:center; justify-content:center; opacity:0; transition:.2s; color:var(--accent);}
+.p-card:hover .p-badge{opacity:1;}
+.p-badge svg{width:14px; height:14px;}
+.p-body{padding:1rem 1.1rem 1.1rem;}
+.p-cat{font-family:var(--font-mono); font-size:.68rem; color:var(--accent); text-transform:uppercase; letter-spacing:.05em; margin-bottom:.3rem;}
+.p-title{font-size:1rem; color:var(--text); margin-bottom:.7rem;}
+.p-case-btn{font-family:var(--font-mono); font-size:.72rem; color:var(--accent-3); display:inline-flex; align-items:center; gap:.4rem; border:1px solid var(--line); border-radius:99px; padding:.4rem .8rem; transition:.2s;}
+.p-case-btn:hover{border-color:var(--accent-3); background:var(--surface-2);}
+.p-case-btn svg{width:11px; height:11px;}
+
+.case-detail{display:none; margin-top:1.8rem; border:1px solid var(--accent-dim); border-radius:var(--radius); background:var(--surface); padding:1.6rem 1.8rem; animation:fadein .35s ease both;}
+.case-detail.show{display:block;}
+.case-detail-head{display:flex; justify-content:space-between; align-items:flex-start; gap:1rem; margin-bottom:1.2rem;}
+.case-detail-head h3{font-size:1.15rem; color:var(--text);}
+.case-detail-head .close-case{font-family:var(--font-mono); font-size:.72rem; color:var(--text-faint); border:1px solid var(--line); border-radius:99px; padding:.35rem .75rem;}
+.case-detail-head .close-case:hover{color:var(--text); border-color:var(--line-soft);}
+.case-grid{display:grid; grid-template-columns:1fr 1fr; gap:1.4rem;}
+.case-block h5{font-family:var(--font-mono); font-size:.68rem; color:var(--accent); text-transform:uppercase; letter-spacing:.06em; margin-bottom:.5rem;}
+.case-block p, .case-block li{font-size:.85rem; color:var(--text-dim); line-height:1.6;}
+.case-block ul{padding-left:0;}
+.case-block li{position:relative; padding-left:1rem; margin-bottom:.35rem;}
+.case-block li::before{content:"›"; position:absolute; left:0; color:var(--accent);}
+.case-links{display:flex; gap:.8rem; margin-top:1.3rem;}
+.case-links a{font-family:var(--font-mono); font-size:.75rem; color:var(--accent-3); border:1px solid var(--line); border-radius:99px; padding:.5rem 1rem; display:inline-flex; align-items:center; gap:.4rem;}
+.case-links a:hover{border-color:var(--accent-3); background:var(--surface-2);}
+@media(max-width:760px){.project-list{grid-template-columns:1fr;} .case-grid{grid-template-columns:1fr;}}
+
+/* ============================================================
+   CONTACT
+   ============================================================ */
+.contact-cta{border:1px solid var(--line); border-radius:var(--radius); background:linear-gradient(135deg, rgba(52,224,161,.08), rgba(91,140,255,.05)); padding:1.6rem 1.8rem; margin-bottom:2rem;}
+.contact-cta h3{font-size:1.15rem; margin-bottom:.4rem;}
+.contact-cta p{color:var(--text-dim); font-size:.92rem;}
+.contact-grid{display:grid; grid-template-columns:1fr 1fr; gap:2rem;}
+.contact-info-card{border:1px solid var(--line); border-radius:var(--radius); background:var(--surface); padding:1.5rem; display:flex; flex-direction:column; gap:1.1rem; box-shadow:var(--shadow-soft);}
+.form{display:flex; flex-direction:column; gap:.9rem;}
+.input-wrapper{display:flex; gap:.9rem;}
+.form-input{width:100%; background:var(--surface); border:1px solid var(--line); border-radius:var(--radius-sm); padding:.85rem 1rem; color:var(--text); font-family:var(--font-body); font-size:.88rem; transition:.2s;}
+.form-input::placeholder{color:var(--text-faint);}
+.form-input:focus{border-color:var(--accent);}
+textarea.form-input{min-height:130px; resize:vertical;}
+.form-btn{align-self:flex-start; display:flex; align-items:center; gap:.6rem; background:var(--accent); color:#03110b; font-weight:600; font-size:.88rem; padding:.85rem 1.5rem; border-radius:var(--radius-sm); transition:.2s;}
+.form-btn svg{width:15px; height:15px;}
+.form-btn:disabled{opacity:.45; cursor:not-allowed;}
+.form-btn:not(:disabled):hover{transform:translateY(-2px); box-shadow:0 10px 20px -8px rgba(52,224,161,.4);}
+
+/* ============================================================
+   RESPONSIVE
+   ============================================================ */
+@media (max-width: 980px){
+  .app{grid-template-columns:1fr;}
+  .sidebar{display:none;}
+  .dock{display:none;}
+  .topbar{display:flex; align-items:center; justify-content:space-between; position:sticky; top:0; z-index:20; padding:1rem 1.2rem; background:rgba(10,14,19,.9); backdrop-filter:blur(10px); border-bottom:1px solid var(--line);}
+  .topbar .brand{display:flex; align-items:center; gap:.7rem; font-family:var(--font-mono); font-size:.85rem; color:var(--text);}
+  .topbar .brand img{width:32px; height:32px; border-radius:50%; border:1px solid var(--line);}
+  .content{padding:1.3rem 1.1rem 6rem; max-width:100%;}
+  .hero{grid-template-columns:1fr;}
+  .pipeline-track{grid-template-columns:1fr 1fr;}
+  .pipeline-track::before{display:none;}
+  .meter-grid{grid-template-columns:1fr;}
+  .project-list{grid-template-columns:1fr;}
+  .contact-grid{grid-template-columns:1fr;}
+  .input-wrapper{flex-direction:column;}
+  .t-period{margin-left:0;}
+  .sec-grid{grid-template-columns:1fr 1fr;}
+  .case-grid{grid-template-columns:1fr;}
+
+  .bottom-nav{display:flex; position:fixed; bottom:0; left:0; right:0; z-index:30; background:rgba(10,14,19,.92); backdrop-filter:blur(10px); border-top:1px solid var(--line); padding:.4rem .2rem calc(.4rem + env(safe-area-inset-bottom)); overflow-x:auto;}
+  .bottom-nav .dock-btn{flex:none; width:64px; height:52px;}
+}
+@media (max-width:560px){
+  .stat-grid{grid-template-columns:1fr 1fr;}
+  .pipeline-track{grid-template-columns:1fr 1fr;}
+  .sec-grid{grid-template-columns:1fr 1fr;}
+}
+</style>
 </head>
-
 <body>
 
-  <main>
+<!-- MOBILE TOPBAR -->
+<header class="topbar">
+  <div class="brand">
+    <img src="./assets/images/my-avatar.png" alt="" onerror="this.style.display='none'">
+    <span>aditya<span style="color:var(--accent)">@</span>devsecops</span>
+  </div>
+  <span style="font-family:var(--font-mono); font-size:.7rem; color:var(--accent);">● online</span>
+</header>
 
-    <!-- SIDEBAR -->
-    <aside class="sidebar" data-sidebar>
+<div class="app">
 
-      <div class="sidebar-info">
+  <!-- SIDEBAR -->
+  <aside class="sidebar">
+    <div class="avatar-wrap">
+      <img src="./assets/images/my-avatar.png" alt="Aditya Mishra" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+      <div class="avatar-fallback">AM</div>
+      <span class="status-dot" aria-hidden="true"></span>
+    </div>
 
-        <figure class="avatar-box">
-          <img src="./assets/images/my-avatar.png" alt="Aditya Mishra" width="80">
-        </figure>
+    <div class="identity">
+      <h1>Aditya Mishra</h1>
+      <p class="role-tag">devsecops.trainee<span class="cursor">_</span></p>
+      <span class="avail-pill"><span class="dot"></span>Open to opportunities</span>
+    </div>
 
-        <div class="info-content">
-          <h1 class="name" title="Aditya Mishra">Aditya Mishra</h1>
-          <p class="title">Software Developer</p>
+    <div class="sidebar-section">
+      <p class="label">// contact</p>
+      <div class="contact-row">
+        <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 6l9 7 9-7M4 5h16a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V6a1 1 0 0 1 1-1z"/></svg></span>
+        <div class="meta"><p>Email</p><a href="mailto:adityamishra0411@gmail.com" target="_blank">adityamishra0411@gmail.com</a></div>
+      </div>
+      <div class="contact-row">
+        <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M7 2h10a1 1 0 0 1 1 1v18a1 1 0 0 1-1 1H7a1 1 0 0 1-1-1V3a1 1 0 0 1 1-1z"/><path d="M11 18h2"/></svg></span>
+        <div class="meta"><p>Phone</p><a href="tel:+918092874359">+91 8092874359</a></div>
+      </div>
+      <div class="contact-row">
+        <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 21s-7-6.1-7-11a7 7 0 1 1 14 0c0 4.9-7 11-7 11z"/><circle cx="12" cy="10" r="2.4"/></svg></span>
+        <div class="meta"><p>Location</p><span>Pune, Maharashtra, India</span></div>
+      </div>
+    </div>
+
+    <div class="sidebar-section">
+      <p class="label">// connect</p>
+      <div class="social-row" style="margin-bottom:.9rem;">
+        <a href="https://github.com/Aditya-0411" target="_blank" aria-label="GitHub"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a10 10 0 0 0-3.16 19.5c.5.1.68-.22.68-.48v-1.7c-2.78.6-3.37-1.34-3.37-1.34-.46-1.16-1.11-1.47-1.11-1.47-.9-.62.07-.6.07-.6 1 .07 1.53 1.03 1.53 1.03.89 1.52 2.34 1.08 2.91.83.09-.65.35-1.08.63-1.33-2.22-.25-4.56-1.11-4.56-4.95 0-1.1.39-1.99 1.03-2.69-.1-.25-.45-1.28.1-2.66 0 0 .84-.27 2.75 1.02a9.5 9.5 0 0 1 5 0c1.91-1.3 2.75-1.02 2.75-1.02.55 1.38.2 2.41.1 2.66.64.7 1.03 1.59 1.03 2.69 0 3.85-2.35 4.7-4.58 4.94.36.31.68.92.68 1.85v2.75c0 .26.18.58.69.48A10 10 0 0 0 12 2z"/></svg></a>
+        <a href="https://www.linkedin.com/in/aditya-mishra0411/" target="_blank" aria-label="LinkedIn"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M6.94 8.5H3.56V20h3.38V8.5zM5.25 3a1.96 1.96 0 1 0 0 3.92A1.96 1.96 0 0 0 5.25 3zM20.45 20h-3.37v-5.6c0-1.34-.02-3.06-1.87-3.06-1.87 0-2.16 1.46-2.16 2.96V20H9.68V8.5h3.24v1.57h.05c.45-.86 1.56-1.77 3.2-1.77 3.43 0 4.28 2.26 4.28 5.19V20z"/></svg></a>
+      </div>
+      <a class="resume-dl" href="./assets/Aditya_Mishra_Resume.pdf" download>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3v12m0 0l-4-4m4 4l4-4M5 21h14"/></svg>
+        Download Resume
+      </a>
+    </div>
+
+    <div class="sidebar-footer">
+      SYSTEM_STATUS: <b>operational</b><br>
+      ENV: <b>production</b> · LAST_DEPLOY: 2026-07
+    </div>
+  </aside>
+
+  <!-- DOCK NAV -->
+  <nav class="dock" data-dock>
+    <button class="dock-btn active" data-nav-link data-target="about" aria-label="About"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="8" r="3.2"/><path d="M5 20c0-3.6 3.1-6 7-6s7 2.4 7 6"/></svg><span>about</span></button>
+    <button class="dock-btn" data-nav-link data-target="ops" aria-label="Ops"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M13 2 3 14h7l-1 8 10-12h-7l1-8z"/></svg><span>ops</span></button>
+    <button class="dock-btn" data-nav-link data-target="radar" aria-label="Radar"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/><path d="M12 12l6-6"/></svg><span>radar</span></button>
+    <button class="dock-btn" data-nav-link data-target="resume" aria-label="Resume"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M6 2h9l3 3v17H6z"/><path d="M14 2v4h4M9 12h6M9 16h6M9 8h2"/></svg><span>resume</span></button>
+    <button class="dock-btn" data-nav-link data-target="portfolio" aria-label="Work"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg><span>work</span></button>
+    <button class="dock-btn" data-nav-link data-target="contact" aria-label="Contact"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 6l9 7 9-7M4 5h16a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V6a1 1 0 0 1 1-1z"/></svg><span>contact</span></button>
+  </nav>
+
+  <!-- MAIN CONTENT -->
+  <main class="content">
+
+    <!-- ================= ABOUT / COMMAND CENTER ================= -->
+    <section id="about" class="page active">
+
+      <div class="status-strip">
+        <span class="status-pill pass"><span class="sdot"></span>Security: Passing</span>
+        <span class="sep"></span>
+        <span class="status-pill info"><span class="sdot"></span>Env: Production</span>
+        <span class="sep"></span>
+        <span class="status-pill pass"><span class="sdot"></span>Availability: Open</span>
+        <span class="sep"></span>
+        <span class="status-pill idle"><span class="sdot"></span>Last deploy: 2026-07</span>
+      </div>
+
+      <div class="hero">
+        <div class="terminal">
+          <div class="terminal-bar">
+            <span class="tdot r"></span><span class="tdot y"></span><span class="tdot g"></span>
+            <span class="tname">aditya@devsecops — zsh</span>
+            <span class="terminal-hint">type 'help'</span>
+          </div>
+          <div class="terminal-body" id="termBody" aria-live="polite">
+            <p class="ln"><span class="prompt">❯</span> <span class="path">~/portfolio</span> whoami</p>
+            <p class="ln out" id="typed-line"><span class="tcaret"></span></p>
+          </div>
+          <div class="terminal-input-row">
+            <span class="prompt">❯</span>
+            <input type="text" id="termInput" class="terminal-input" placeholder="type a command…" autocomplete="off" spellcheck="false" aria-label="Terminal command input">
+          </div>
         </div>
 
-        <button class="info_more-btn" data-sidebar-btn>
-          <span>Show Contacts</span>
-          <ion-icon name="chevron-down"></ion-icon>
-        </button>
-
-      </div>
-
-      <div class="sidebar-info_more">
-
-        <div class="separator"></div>
-
-        <ul class="contacts-list">
-
-          <li class="contact-item">
-            <div class="icon-box">
-              <ion-icon name="mail-outline"></ion-icon>
-            </div>
-            <div class="contact-info">
-              <p class="contact-title">Email</p>
-              <a href="adityamishra0411@gmail.com" class="contact-link">adityamishra0411@gmail.com</a>
-            </div>
-          </li>
-
-          <li class="contact-item">
-            <div class="icon-box">
-              <ion-icon name="phone-portrait-outline"></ion-icon>
-            </div>
-            <div class="contact-info">
-              <p class="contact-title">Phone</p>
-              <a href="tel:+918092874359" class="contact-link">+91 8092874359</a>
-            </div>
-          </li>
-
-          <li class="contact-item">
-            <div class="icon-box">
-              <ion-icon name="calendar-outline"></ion-icon>
-            </div>
-            <div class="contact-info">
-              <p class="contact-title">Birthday</p>
-              <time datetime="2003-08-04">August 04, 2003</time>
-            </div>
-          </li>
-
-          <li class="contact-item">
-            <div class="icon-box">
-              <ion-icon name="location-outline"></ion-icon>
-            </div>
-            <div class="contact-info">
-              <p class="contact-title">Location</p>
-              <address>Pune, Maharashtra, India</address>
-            </div>
-          </li>
-
-        </ul>
-
-        <div class="separator"></div>
-
-        <ul class="social-list">
-          <li class="social-item">
-            <a href="https://github.com/Aditya-0411" class="social-link">
-              <ion-icon name="logo-github"></ion-icon>
-            </a>
-          </li>
-          <li class="social-item">
-            <a href="https://www.linkedin.com/in/aditya-mishra0411/" class="social-link">
-              <ion-icon name="logo-linkedin"></ion-icon>
-            </a>
-          </li>
-        </ul>
-
-      </div>
-
-    </aside>
-
-    <!-- MAIN CONTENT -->
-    <div class="main-content">
-
-      <!-- NAVBAR -->
-      <nav class="navbar">
-        <ul class="navbar-list">
-          <li class="navbar-item"><button class="navbar-link active" data-nav-link>About</button></li>
-          <li class="navbar-item"><button class="navbar-link" data-nav-link>Resume</button></li>
-          <li class="navbar-item"><button class="navbar-link" data-nav-link>Portfolio</button></li>
-          <li class="navbar-item"><button class="navbar-link" data-nav-link>Contact</button></li>
-        </ul>
-      </nav>
-
-      <!-- ABOUT -->
-      <article class="about active" data-page="about">
-        <header><h2 class="h2 article-title">About me</h2></header>
-        <section class="about-text">
-          <p>I'm a full-stack developer specializing in building websites and designing backends for Android and iOS applications.</p>
-          <p>My goal is to create creative, clean, and professional solutions that are simple to use and easy to navigate, 
-            helping you bring your ideas to life on the web and mobile devices.</p>
-        </section>
-
-        <!-- SERVICE -->
-        <section class="service">
-          <h3 class="h3 service-title">What I'm doing</h3>
-          <ul class="service-list">
-            <li class="service-item">
-              <div class="service-icon-box"><img src="./assets/images/icon-design.svg" alt="design" width="40"></div>
-              <div class="service-content-box">
-                <h4 class="h4 service-item-title">API Design</h4>
-                <p class="service-item-text">Powerful and well-documented APIs to connect different parts of an application, 
-                    enabling smooth data flow and integration.</p>
+        <div class="hero-side">
+          <div>
+            <p class="tag">// currently</p>
+            <div style="margin-top:.75rem; display:flex; flex-direction:column; gap:.55rem;">
+              <div style="display:flex; justify-content:space-between; align-items:baseline; gap:.6rem;">
+                <span style="font-family:var(--font-mono); font-size:.64rem; color:var(--text-faint); text-transform:uppercase; letter-spacing:.06em;">Current Role</span>
+                <span style="font-size:.86rem; color:var(--text); font-weight:600; text-align:right;">DevSecOps Trainee</span>
               </div>
-            </li>
-            <li class="service-item">
-              <div class="service-icon-box"><img src="./assets/images/icon-dev.svg" alt="Web dev" width="40"></div>
-              <div class="service-content-box">
-                <h4 class="h4 service-item-title">Web development</h4>
-                <p class="service-item-text">High-quality websites from scratch, focusing on performance, 
-                    scalability, and modern design principles to provide a seamless user experience.</p>
+              <div style="display:flex; justify-content:space-between; align-items:baseline; gap:.6rem;">
+                <span style="font-family:var(--font-mono); font-size:.64rem; color:var(--text-faint); text-transform:uppercase; letter-spacing:.06em;">Organization</span>
+                <span style="font-size:.86rem; color:var(--text-dim); text-align:right;">Tata Consultancy Services</span>
               </div>
-            </li>
-            <li class="service-item">
-              <div class="service-icon-box"><img src="./assets/images/icon-app.svg" alt="App" width="40"></div>
-              <div class="service-content-box">
-                <h4 class="h4 service-item-title">Mobile apps</h4>
-                <p class="service-item-text">Robust backends for iOS and Android applications, 
-                    ensuring your mobile platforms have a strong, secure, and efficient foundation.</p>
+              <div style="display:flex; justify-content:space-between; align-items:baseline; gap:.6rem;">
+                <span style="font-family:var(--font-mono); font-size:.64rem; color:var(--text-faint); text-transform:uppercase; letter-spacing:.06em;">Primary Focus</span>
+                <span style="font-size:.86rem; color:var(--text-dim); text-align:right;">DevSecOps • Python • Cloud</span>
               </div>
-            </li>
-            <!-- <li class="service-item">
-              <div class="service-icon-box"><img src="./assets/images/icon-photo.svg" alt="Photo" width="40"></div>
-              <div class="service-content-box">
-                <h4 class="h4 service-item-title">Photography</h4>
-                <p class="service-item-text">I make high-quality photos of any category...</p>
+              <div style="display:flex; justify-content:space-between; align-items:baseline; gap:.6rem;">
+                <span style="font-family:var(--font-mono); font-size:.64rem; color:var(--text-faint); text-transform:uppercase; letter-spacing:.06em;">Methodology</span>
+                <span style="font-size:.86rem; color:var(--text-dim); text-align:right;">Scaled Agile</span>
               </div>
-            </li> -->
-          </ul>
-        </section>
-
-      </article>
-
-      <!-- RESUME -->
-      <article class="resume" data-page="resume">
-        <header><h2 class="h2 article-title">Resume</h2></header>
-        <section class="timeline">
-          <div class="title-wrapper"><div class="icon-box"><ion-icon name="book-outline"></ion-icon></div><h3 class="h3">Education</h3></div>
-          <ol class="timeline-list">
-            <li class="timeline-item"><h4 class="h4 timeline-item-title">Bharati Vidyapeeth College Of Engineering, Pune </h4>
-                <span>2021-2025</span>
-                <p class="timeline-text">B.tech Computer Engineering - A Grade</p>
-            </li>
-            <li class="timeline-item"><h4 class="h4 timeline-item-title">Sree Ayyappa Public School,BKSC, Jharkhand</h4>
-                <span>2019-2021</span>
-                <p class="timeline-text">12th Grade- 84%</p>
-            </li>
-            <!-- <li class="timeline-item"><h4 class="h4 timeline-item-title">High school of art and design</h4>
-                <span>2002 — 2004</span>
-                <p class="timeline-text">Duis aute irure dolor in reprehenderit...</p>
-            </li> -->
-          </ol>
-        </section>
-
-        <section class="timeline">
-          <div class="title-wrapper"><div class="icon-box"><ion-icon name="book-outline"></ion-icon></div><h3 class="h3">Experience</h3></div>
-          <ol class="timeline-list">
-            <li class="timeline-item"><h4 class="h4 timeline-item-title">Full Stack Web Developer</h4>
-                <h5 class="h5">Dayasara Entertainment pvt.ltd</h5>
-                <span>March 2025 - Present</span>
-                <p class="timeline-text"> Contributed to the existing website, 
-                    fixing bugs and optimizing performance.
-                    Assigned to work on full-stack projects including a fantasy app & an e-commerce website.
-                    Developed and maintained web applications.
-                    Optimized application performance and enhanced overall functionality.
-                    <!-- <a href="//start25pro.com/" target="_blank" rel="noopener noreferrer">start25pro.com</a> -->
-
-                 </p>
-            </li>
-
-
-
-
-                        <li class="timeline-item"><h4 class="h4 timeline-item-title">Software Developer Intern</h4>
-                <h5 class="h5">KIDA Studios,Pune</h5>
-                <span>January 2024-March 2024</span>
-                <p class="timeline-text"> Created a Generalized Organization Management system designed to manage organizations, teams, users, and 
-                    repositories similar to the functionality found in GitHub. 
-                    Worked with the backend team on an ongoing stock project.
-                    Developed user management features.  
-                    Integrated reporting system and ticketing system. 
-                    Did admin panel enhancements</p>
-            </li>
- 
-          </ol>
-        </section>
-        <section class="skill">
-          <h3 class="h3 skills-title">My skills</h3>
-          <ul class="skills-list content-card">
-            <li class="skills-item"><div class="title-wrapper"><h5 class="h5">Web Development</h5><data value="80">80%</data></div><div class="skill-progress-bg"><div class="skill-progress-fill" style="width: 80%;"></div></div></li>
-            <li class="skills-item"><div class="title-wrapper"><h5 class="h5">Database Management</h5><data value="70">70%</data></div><div class="skill-progress-bg"><div class="skill-progress-fill" style="width: 70%;"></div></div></li>
-            <li class="skills-item"><div class="title-wrapper"><h5 class="h5">Backend Development</h5><data value="90">90%</data></div><div class="skill-progress-bg"><div class="skill-progress-fill" style="width: 90%;"></div></div></li>
-            <li class="skills-item"><div class="title-wrapper"><h5 class="h5">Cloud Computing</h5><data value="50">50%</data></div><div class="skill-progress-bg"><div class="skill-progress-fill" style="width: 50%;"></div></div></li>
-          </ul>
-        </section>
-      </article>
-
-      <!-- PORTFOLIO -->
-      <article class="portfolio" data-page="portfolio">
-        <header><h2 class="h2 article-title">Portfolio</h2></header>
-        <section class="projects">
-          <ul class="filter-list">
-            <li class="filter-item"><button class="active" data-filter-btn>All</button></li>
-            <li class="filter-item"><button data-filter-btn>Backend Development</button></li>
-            <li class="filter-item"><button data-filter-btn>Applications</button></li>
-            <li class="filter-item"><button data-filter-btn>Web development</button></li>
-          </ul>
-          <div class="filter-select-box">
-            <button class="filter-select" data-select><div class="select-value" data-selecct-value>Select category</div><div class="select-icon"><ion-icon name="chevron-down"></ion-icon></div></button>
-            <ul class="select-list">
-              <li class="select-item"><button data-select-item>All</button></li>
-              <li class="select-item"><button data-select-item>Backend Development</button></li>
-              <li class="select-item"><button data-select-item>Applications</button></li>
-              <li class="select-item"><button data-select-item>Web development</button></li>
-            </ul>
+            </div>
           </div>
+          <div class="stat-grid">
+            <div class="stat"><b data-count="11">0</b><span>Projects delivered</span></div>
+            <div class="stat"><b data-count="4">0</b><span>Production deployments</span></div>
+            <div class="stat"><b data-count="20">0</b><span>Technologies used</span></div>
+            <div class="stat"><b data-count="2">0</b><span>Years of experience</span></div>
+          </div>
+        </div>
+      </div>
 
-          <ul class="project-list">
-            <li class="project-item  active" data-filter-item data-category="web development">
-              <a href="https://pos-billing-software.web.app/register">
+      <div class="block">
+        <p class="eyebrow">$ cat about.md<span class="blink">_</span></p>
+        <p style="color:var(--text-dim); max-width:64ch; margin-bottom:.9rem;">I'm a full-stack developer who started by building production websites and backends for Android/iOS applications, and is now transitioning into <strong style="color:var(--text)">DevSecOps, Cloud, and Platform Engineering</strong> as a trainee at TCS.</p>
+        <p style="color:var(--text-dim); max-width:64ch;">My goal is to become a skilled DevSecOps Engineer, Cloud Security Engineer, and Platform Engineer — combining the product instincts of a full-stack builder with the discipline of secure delivery pipelines.</p>
+      </div>
 
-                <figure class="project-img">
-                  <div class="project-item-icon-box">
-                    <ion-icon name="eye-outline"></ion-icon>
-                  </div>
+      <div class="block">
+        <p class="eyebrow">$ cat mission.log<span class="blink">_</span></p>
+        <div class="mission-grid">
+          <div class="mission-item"><span class="mdot"></span>Building Kubernetes-based deployment projects</div>
+          <div class="mission-item"><span class="mdot"></span>Automating AWS infrastructure tasks</div>
+          <div class="mission-item"><span class="mdot"></span>Practicing security automation &amp; scripting</div>
+          <div class="mission-item"><span class="mdot"></span>Learning Infrastructure as Code (Terraform)</div>
+          <div class="mission-item"><span class="mdot"></span>Deepening cloud security fundamentals</div>
+          <div class="mission-item"><span class="mdot"></span>Building Python automation tools for DevSecOps</div>
+        </div>
+      </div>
 
-                  <img src="./assets/images/POS&billing.jpg" alt="POS&Billing" loading="lazy">
-                  
-                </figure>
+      <div class="block">
+        <p class="eyebrow">$ cat why-hire-me.md<span class="blink">_</span></p>
+        <div class="whyhire-grid">
+          <div class="whyhire-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg>Full-stack development experience — shipped real production sites</div>
+          <div class="whyhire-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg>Hands-on DevSecOps exposure at TCS — CI/CD security &amp; automation</div>
+          <div class="whyhire-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg>Working cloud knowledge — AWS EC2, S3, RDS</div>
+          <div class="whyhire-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg>Security-first mindset — vulnerability assessment &amp; remediation</div>
+          <div class="whyhire-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg>Automation expertise — Python &amp; Bash scripting</div>
+          <div class="whyhire-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg>Fast, proven learning ability — full-stack → DevSecOps in under a year</div>
+        </div>
+      </div>
 
-                <h3 class="project-title">POS & Billing Software</h3>
-
-                <p class="project-category">Web development</p>
-
-              </a>
-            </li>
-
-            <li class="project-item  active" data-filter-item data-category="web development">
-              <a href="https://start25pro.com/">
-
-                <figure class="project-img">
-                  <div class="project-item-icon-box">
-                    <ion-icon name="eye-outline"></ion-icon>
-                  </div>
-
-                  <img src="./assets/images/star25.jpg" alt="Start25" loading="lazy">
-                  
-                </figure>
-
-                <h3 class="project-title">Star25Pro</h3>
-
-                <p class="project-category">Web development</p>
-
-              </a>
-            </li>
-
-            
-            <li class="project-item  active" data-filter-item data-category="web development">
-              <a href="https://snake-game-41341.web.app/">
-
-                <figure class="project-img">
-                  <div class="project-item-icon-box">
-                    <ion-icon name="eye-outline"></ion-icon>
-                  </div>
-
-                  <img src="./assets/images/SnakeGame.jpg" alt="Snakegame" loading="lazy">
-                  
-                </figure>
-
-                <h3 class="project-title">SnakeGame</h3>
-
-                <p class="project-category">Web development</p>
-
-              </a>
-            </li>
-
-            
-            <li class="project-item  active" data-filter-item data-category="backend development">
-              <a href="https://github.com/Aditya-0411/CARPROJECT">
-
-                <figure class="project-img">
-                  <div class="project-item-icon-box">
-                    <ion-icon name="eye-outline"></ion-icon>
-                  </div>
-
-                  <img src="./assets/images/backend1.jpg" alt="task manager" loading="lazy">
-                </figure>
-
-                <h3 class="project-title">Car Data App</h3>
-
-                <p class="project-category">Backend Development</p>
-
-              </a>
-            </li>
-
-
-
-             
-            <li class="project-item  active" data-filter-item data-category="backend development">
-              <a href="https://github.com/Aditya-0411/Stock-Project">
-
-                <figure class="project-img">
-                  <div class="project-item-icon-box">
-                    <ion-icon name="eye-outline"></ion-icon>
-                  </div>
-
-                  <img src="./assets/images/backend2.jpg" alt="task manager" loading="lazy">
-                </figure>
-
-                <h3 class="project-title">Stock App</h3>
-
-                <p class="project-category">Backend Development</p>
-
-              </a>
-            </li>
-
-
-            <li class="project-item  active" data-filter-item data-category="backend development">
-              <a href="https://github.com/Aditya-0411/Organization-Management-System">
-
-                <figure class="project-img">
-                  <div class="project-item-icon-box">
-                    <ion-icon name="eye-outline"></ion-icon>
-                  </div>
-
-                  <img src="./assets/images/backend3.jpg" alt="task manager" loading="lazy">
-                </figure>
-
-                <h3 class="project-title">Org-Management</h3>
-
-                <p class="project-category">Backend Development</p>
-
-              </a>
-            </li>
-
-
-
-
-            <li class="project-item  active" data-filter-item data-category="applications">
-              <a href="#">
-
-                <figure class="project-img">
-                  <div class="project-item-icon-box">
-                    <ion-icon name="eye-outline"></ion-icon>
-                  </div>
-
-                  <img src="./assets/images/fantasy1.jpg" alt="task manager" loading="lazy">
-                </figure>
-
-                <h3 class="project-title">Fantasy App</h3>
-
-                <p class="project-category">Applications</p>
-
-              </a>
-            </li>
-
-            <li class="project-item  active" data-filter-item data-category="applications">
-              <a href="#">
-
-                <figure class="project-img">
-                  <div class="project-item-icon-box">
-                    <ion-icon name="eye-outline"></ion-icon>
-                  </div>
-
-                  <img src="./assets/images/fantasy3.jpg" alt="task manager" loading="lazy">
-                </figure>
-
-                <h3 class="project-title">Fantasy App</h3>
-
-                <p class="project-category">Applications</p>
-
-              </a>
-            </li>
-
-            
-            <li class="project-item  active" data-filter-item data-category="applications">
-              <a href="#">
-
-                <figure class="project-img">
-                  <div class="project-item-icon-box">
-                    <ion-icon name="eye-outline"></ion-icon>
-                  </div>
-
-                  <img src="./assets/images/fantasy2.jpg" alt="task manager" loading="lazy">
-                </figure>
-
-                <h3 class="project-title">Fantasy App</h3>
-
-                <p class="project-category">Applications</p>
-
-              </a>
-            </li>
- 
-          </ul>
-        </section>
-      </article>
-
-      <!-- CONTACT -->
-      <article class="contact" data-page="contact">
-        <header><h2 class="h2 article-title">Contact</h2></header>
-        <!-- <section class="mapbox" data-mapbox>
-          <figure><iframe src="https://www.google.com/maps/embed?pb=!1m18!..." width="400" height="300" loading="lazy"></iframe></figure>
-        </section> -->
-        <section class="contact-form">
-          <h3 class="h3 form-title">Contact Form</h3>
-          <form action="#" class="form" data-form>
-            <div class="input-wrapper">
-              <input type="text" name="fullname" class="form-input" placeholder="Full name" required data-form-input>
-              <input type="email" name="email" class="form-input" placeholder="Email address" required data-form-input>
+      <div class="block">
+        <p class="eyebrow">$ cat capabilities.log<span class="blink">_</span></p>
+        <section class="pipeline">
+          <div class="pipeline-track">
+            <div class="stage">
+              <div class="stage-node"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M8 9l-4 3 4 3M16 9l4 3-4 3M14 4l-4 16"/></svg></div>
+              <h4>API Design</h4>
+              <p>Well-documented APIs connecting different parts of an application for smooth data flow and integration.</p>
             </div>
-            <textarea name="message" class="form-input" placeholder="Your Message" required data-form-input></textarea>
-            <button class="form-btn" type="submit" disabled data-form-btn><ion-icon name="paper-plane"></ion-icon><span>Send Message</span></button>
-          </form>
+            <div class="stage">
+              <div class="stage-node"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="4" y="4" width="16" height="4"/><path d="M4 12h16v8H4z"/><path d="M8 16h.01M12 16h.01"/></svg></div>
+              <h4>Web Development</h4>
+              <p>High-quality websites from scratch — performance, scalability, and modern design principles.</p>
+            </div>
+            <div class="stage">
+              <div class="stage-node"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="6" y="10" width="12" height="9" rx="1.5"/><path d="M9 10V7a3 3 0 0 1 6 0v3"/></svg></div>
+              <h4>Mobile Backends</h4>
+              <p>Robust backends for iOS and Android apps — strong, secure, and efficient foundations.</p>
+            </div>
+            <div class="stage">
+              <div class="stage-node"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M7 18a4.5 4.5 0 0 1-.4-9A5.5 5.5 0 0 1 17.4 8 4 4 0 0 1 17 18H7z"/></svg></div>
+              <h4>Cloud &amp; Security</h4>
+              <p>Deploying on AWS (EC2, S3, RDS) with a growing foundation in cloud architecture and security.</p>
+            </div>
+            <div class="stage">
+              <div class="stage-node"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="4" width="7" height="16" rx="1"/><rect x="14" y="4" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="6" rx="1"/></svg></div>
+              <h4>Full Stack Development</h4>
+              <p>End-to-end ownership from frontend to backend — shipping production-ready features across the stack.</p>
+            </div>
+            <div class="stage">
+              <div class="stage-node"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M13 2 3 14h7l-1 8 10-12h-7l1-8z"/><circle cx="18" cy="6" r="2.4"/></svg></div>
+              <h4>DevSecOps</h4>
+              <p>Embedding security into CI/CD pipelines with automated scanning, secrets detection, and policy checks.</p>
+            </div>
+            <div class="stage">
+              <div class="stage-node"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 2l8 4v6c0 5-3.4 8.7-8 10-4.6-1.3-8-5-8-10V6z"/><path d="M9 12l2 2 4-4"/></svg></div>
+              <h4>Cybersecurity</h4>
+              <p>Vulnerability assessment, secure SDLC practices, and hardening applications against common attack vectors.</p>
+            </div>
+          </div>
         </section>
-      </article>
+      </div>
+    </section>
 
-    </div>
+    <!-- ================= OPS (PIPELINE + SECURITY + ARCHITECTURE) ================= -->
+    <section id="ops" class="page">
+      <div class="status-strip">
+        <span class="status-pill pass"><span class="sdot"></span>Pipeline: Passing</span><span class="sep"></span>
+        <span class="status-pill pass"><span class="sdot"></span>Vulnerabilities: 0 critical</span><span class="sep"></span>
+        <span class="status-pill info"><span class="sdot"></span>Cluster: Simulated</span>
+      </div>
+
+      <header class="block">
+        <h2 class="h2">DevSecOps Pipeline</h2>
+        <p class="h2-lede">A simulated view of how code moves from commit to production through security gates. Click replay to watch it run.</p>
+
+        <div class="cd-pipeline" id="cdPipeline">
+          <div class="cd-row" id="cdRow"></div>
+        </div>
+        <button class="cd-replay" id="cdReplay">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12a9 9 0 1 0 3-6.7M3 4v5h5"/></svg>
+          Replay pipeline
+        </button>
+      </header>
+
+      <section class="block">
+        <h2 class="h2">Security Dashboard</h2>
+        <p class="h2-lede">Illustrative status tiles modeled on the checks a real DevSecOps pipeline enforces before shipping.</p>
+        <div class="sec-grid">
+          <div class="sec-tile" style="text-align:center;">
+            <h4>Security Score</h4>
+            <div class="score-ring">
+              <svg width="64" height="64" viewBox="0 0 64 64">
+                <circle class="bgring" cx="32" cy="32" r="27" fill="none" stroke-width="6"/>
+                <circle class="fgring" id="scoreRing" cx="32" cy="32" r="27" fill="none" stroke-width="6" stroke-dasharray="169.6" stroke-dashoffset="169.6"/>
+              </svg>
+              <span class="score-num">92</span>
+            </div>
+            <span class="status-pill pass"><span class="sdot"></span>Hardened</span>
+          </div>
+          <div class="sec-tile"><div class="sec-top"><h4>Compliance</h4><span class="sec-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M9 12l2 2 4-4"/><circle cx="12" cy="12" r="9"/></svg></span></div><span class="status-pill pass"><span class="sdot"></span>Compliant</span></div>
+          <div class="sec-tile"><div class="sec-top"><h4>SAST</h4><span class="sec-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M16 18l6-6-6-6M8 6l-6 6 6 6"/></svg></span></div><span class="status-pill pass"><span class="sdot"></span>Passing</span></div>
+          <div class="sec-tile"><div class="sec-top"><h4>DAST</h4><span class="sec-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.35-4.35"/></svg></span></div><span class="status-pill pass"><span class="sdot"></span>Passing</span></div>
+          <div class="sec-tile"><div class="sec-top"><h4>Container Scan</h4><span class="sec-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="7" width="18" height="13" rx="1"/><path d="M7 7V5a2 2 0 0 1 2-2h6a2 2 0 0 1 2 2v2"/></svg></span></div><span class="status-pill pass"><span class="sdot"></span>Passing (Trivy)</span></div>
+          <div class="sec-tile"><div class="sec-top"><h4>IaC Scan</h4><span class="sec-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 21V7l8-4 8 4v14M4 21h16M9 21v-6h6v6"/></svg></span></div><span class="status-pill pass"><span class="sdot"></span>Passing</span></div>
+          <div class="sec-tile"><div class="sec-top"><h4>Secrets Detection</h4><span class="sec-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="5" y="11" width="14" height="9" rx="1.5"/><path d="M8 11V8a4 4 0 1 1 8 0v3"/></svg></span></div><span class="status-pill pass"><span class="sdot"></span>None found</span></div>
+          <div class="sec-tile"><div class="sec-top"><h4>Cloud Security</h4><span class="sec-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M7 18a4.5 4.5 0 0 1-.4-9A5.5 5.5 0 0 1 17.4 8 4 4 0 0 1 17 18H7z"/></svg></span></div><span class="status-pill pass"><span class="sdot"></span>Hardened</span></div>
+        </div>
+      </section>
+
+      <section class="block">
+        <h2 class="h2">Cloud Architecture</h2>
+        <p class="h2-lede">A representative stack for the kind of full-stack + cloud systems I build and secure.</p>
+        <div class="arch-stack">
+          <div class="arch-layer"><span class="arch-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="4" width="18" height="14" rx="2"/><path d="M8 21h8"/></svg></span><div class="arch-meta"><p>Frontend</p><span>React</span></div></div>
+          <div class="arch-arrow">↓</div>
+          <div class="arch-layer"><span class="arch-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="3" width="18" height="7" rx="1.5"/><rect x="3" y="14" width="18" height="7" rx="1.5"/></svg></span><div class="arch-meta"><p>Backend</p><span>Django / FastAPI / Spring Boot</span></div></div>
+          <div class="arch-arrow">↓</div>
+          <div class="arch-layer"><span class="arch-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><ellipse cx="12" cy="6" rx="8" ry="3"/><path d="M4 6v6c0 1.7 3.6 3 8 3s8-1.3 8-3V6M4 12v6c0 1.7 3.6 3 8 3s8-1.3 8-3v-6"/></svg></span><div class="arch-meta"><p>Database</p><span>PostgreSQL / MySQL</span></div></div>
+          <div class="arch-arrow">↓</div>
+          <div class="arch-layer"><span class="arch-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="7" width="18" height="13" rx="1"/><path d="M7 7V5a2 2 0 0 1 2-2h6a2 2 0 0 1 2 2v2"/></svg></span><div class="arch-meta"><p>Containerization</p><span>Docker</span></div></div>
+          <div class="arch-arrow">↓</div>
+          <div class="arch-layer"><span class="arch-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M13 2 3 14h7l-1 8 10-12h-7l1-8z"/></svg></span><div class="arch-meta"><p>CI/CD</p><span>GitHub Actions / GitLab CI / Jenkins</span></div></div>
+          <div class="arch-arrow">↓</div>
+          <div class="arch-layer"><span class="arch-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 21V7l8-4 8 4v14M4 21h16M9 21v-6h6v6"/></svg></span><div class="arch-meta"><p>Infrastructure</p><span>AWS</span></div></div>
+          <div class="arch-arrow">↓</div>
+          <div class="arch-layer"><span class="arch-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="9"/><path d="M12 3v18M3 12h18"/></svg></span><div class="arch-meta"><p>Reverse Proxy</p><span>Nginx</span></div></div>
+          <div class="arch-arrow">↓</div>
+          <div class="arch-layer"><span class="arch-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 17l4-6 4 3 5-8 5 6"/></svg></span><div class="arch-meta"><p>Monitoring</p><span>Prometheus / Grafana</span></div></div>
+        </div>
+      </section>
+    </section>
+
+    <!-- ================= RADAR (TECH RADAR + CERTS + ROADMAP + ACHIEVEMENTS + GITHUB) ================= -->
+    <section id="radar" class="page">
+      <div class="status-strip">
+        <span class="status-pill info"><span class="sdot"></span>7 skill domains tracked</span>
+      </div>
+
+      <header class="block">
+        <h2 class="h2">Tech Radar</h2>
+        <p class="h2-lede">Breadth across the stack, mapped by domain. Hover the chips below for the full inventory per category.</p>
+        <div class="radar-layout">
+          <div class="radar-wrap" id="radarWrap">
+            <svg id="radarSvg" width="320" height="320" viewBox="0 0 320 320"></svg>
+          </div>
+          <div>
+            <div class="chip-group">
+              <p>Programming</p>
+              <div class="chip-cluster"><span class="chip sec"><span class="sq"></span>Python</span><span class="chip sec"><span class="sq"></span>Java</span><span class="chip sec"><span class="sq"></span>JavaScript</span></div>
+            </div>
+            <div class="chip-group">
+              <p>Frontend</p>
+              <div class="chip-cluster"><span class="chip"><span class="sq"></span>React</span><span class="chip"><span class="sq"></span>Tailwind</span></div>
+            </div>
+            <div class="chip-group">
+              <p>Backend</p>
+              <div class="chip-cluster"><span class="chip"><span class="sq"></span>Django</span><span class="chip"><span class="sq"></span>FastAPI</span><span class="chip"><span class="sq"></span>Spring Boot</span></div>
+            </div>
+            <div class="chip-group">
+              <p>Cloud</p>
+              <div class="chip-cluster"><span class="chip agile"><span class="sq"></span>AWS</span><span class="chip agile"><span class="sq"></span>GCP</span><span class="chip agile"><span class="sq"></span>Azure</span></div>
+            </div>
+            <div class="chip-group">
+              <p>DevOps</p>
+              <div class="chip-cluster"><span class="chip agile"><span class="sq"></span>Docker</span><span class="chip agile"><span class="sq"></span>Kubernetes</span><span class="chip agile"><span class="sq"></span>Terraform</span><span class="chip agile"><span class="sq"></span>GitHub Actions</span><span class="chip agile"><span class="sq"></span>GitLab CI</span><span class="chip agile"><span class="sq"></span>Jenkins</span></div>
+            </div>
+            <div class="chip-group">
+              <p>Security</p>
+              <div class="chip-cluster"><span class="chip sec"><span class="sq"></span>OWASP</span><span class="chip sec"><span class="sq"></span>SAST</span><span class="chip sec"><span class="sq"></span>DAST</span><span class="chip sec"><span class="sq"></span>Vulnerability Assessment</span><span class="chip sec"><span class="sq"></span>Snyk</span><span class="chip sec"><span class="sq"></span>HashiCorp Vault</span><span class="chip sec"><span class="sq"></span>Vault Radar</span></div>
+            </div>
+            <div class="chip-group">
+              <p>Tools</p>
+              <div class="chip-cluster"><span class="chip"><span class="sq"></span>Git</span><span class="chip"><span class="sq"></span>GitLab</span><span class="chip"><span class="sq"></span>Linux</span><span class="chip"><span class="sq"></span>Jira</span><span class="chip"><span class="sq"></span>Postman</span><span class="chip"><span class="sq"></span>AWS CLI</span></div>
+            </div>
+          </div>
+        </div>
+      </header>
+
+      <section class="block">
+        <h2 class="h2">Learning Roadmap</h2>
+        <ol class="roadmap-list">
+          <li class="rm-item done"><h4>Full Stack Development</h4><p>Shipped production websites &amp; backends.</p></li>
+          <li class="rm-item done"><h4>Backend Engineering</h4><p>APIs, databases, application logic.</p></li>
+          <li class="rm-item now"><h4>Cloud Computing</h4><p>AWS deployment &amp; architecture — in progress.</p></li>
+          <li class="rm-item now"><h4>DevSecOps</h4><p>Current focus at TCS — CI/CD security, automation.</p></li>
+          <li class="rm-item"><h4>Cloud Security</h4><p>Next milestone.</p></li>
+          <li class="rm-item"><h4>Platform Engineering</h4><p>Long-term goal.</p></li>
+        </ol>
+      </section>
+
+      <section class="block">
+        <h2 class="h2">Achievements</h2>
+        <div class="ach-grid">
+          <div class="ach-card"><b data-count="11">0</b><span>Projects built</span></div>
+          <div class="ach-card"><b data-count="4">0</b><span>Production deployments</span></div>
+          <div class="ach-card"><b data-count="20">0</b><span>Technologies learned</span></div>
+          <div class="ach-card"><b data-count="3">0</b><span>Companies worked with</span></div>
+          <div class="ach-card"><span style="font-family:var(--font-display); font-size:1.1rem; color:var(--accent-2); display:block;">Getting started</span><span>Hackathons</span></div>
+          <div class="ach-card"><span style="font-family:var(--font-display); font-size:1.1rem; color:var(--accent-2); display:block;">Building publicly</span><span>Open source</span></div>
+        </div>
+      </section>
+
+      <section class="block">
+        <h2 class="h2">GitHub Command Center</h2>
+        <p class="h2-lede">Live stats pulled directly from the GitHub public API — not static numbers.</p>
+        <div class="gh-panel">
+          <div class="gh-head">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a10 10 0 0 0-3.16 19.5c.5.1.68-.22.68-.48v-1.7c-2.78.6-3.37-1.34-3.37-1.34-.46-1.16-1.11-1.47-1.11-1.47-.9-.62.07-.6.07-.6 1 .07 1.53 1.03 1.53 1.03.89 1.52 2.34 1.08 2.91.83.09-.65.35-1.08.63-1.33-2.22-.25-4.56-1.11-4.56-4.95 0-1.1.39-1.99 1.03-2.69-.1-.25-.45-1.28.1-2.66 0 0 .84-.27 2.75 1.02a9.5 9.5 0 0 1 5 0c1.91-1.3 2.75-1.02 2.75-1.02.55 1.38.2 2.41.1 2.66.64.7 1.03 1.59 1.03 2.69 0 3.85-2.35 4.7-4.58 4.94.36.31.68.92.68 1.85v2.75c0 .26.18.58.69.48A10 10 0 0 0 12 2z"/></svg>
+            <a href="https://github.com/Aditya-0411" target="_blank">github.com/Aditya-0411 →</a>
+          </div>
+          <div class="gh-stat-row" id="ghStats">
+            <div class="gh-stat"><b>—</b><span>Public repos</span></div>
+            <div class="gh-stat"><b>—</b><span>Followers</span></div>
+            <div class="gh-stat"><b>—</b><span>Following</span></div>
+            <div class="gh-stat"><b>—</b><span>Since</span></div>
+          </div>
+          <div class="gh-repos" id="ghRepos"></div>
+          <p class="gh-note" id="ghNote">Fetching live data from api.github.com…</p>
+        </div>
+      </section>
+    </section>
+
+    <!-- ================= RESUME ================= -->
+    <section id="resume" class="page">
+      <header><h2 class="h2">Resume</h2></header>
+
+      <section class="timeline">
+        <p class="eyebrow">$ ls experience/ --sort=recent<span class="blink">_</span></p>
+        <ol class="timeline-list">
+          <li class="t-item current">
+            <div class="t-head"><h4>DevSecOps Trainee</h4><span class="t-period">Feb 2026 — Present</span></div>
+            <p class="t-org">Tata Consultancy Services (TCS)</p>
+            <ul class="t-list">
+              <li>Working on integrating security practices into CI/CD pipelines as part of DevSecOps initiatives, aligning development speed with security compliance.</li>
+              <li>Writing Python scripts to automate security checks, log parsing, and reporting tasks across the delivery pipeline.</li>
+              <li>Operating within a Scaled Agile (SAFe) framework — participating in PI planning, sprint ceremonies, and cross-team ART syncs.</li>
+              <li>Managing sprint backlogs, tracking stories/defects, and coordinating delivery using Jira.</li>
+              <li>Contributing to application development tasks alongside secure SDLC and DevSecOps responsibilities.</li>
+              <li>Assisting with vulnerability assessment and remediation tracking to strengthen application security posture.</li>
+            </ul>
+          </li>
+          <li class="t-item">
+            <div class="t-head"><h4>Full Stack Web Developer</h4><span class="t-period">Mar 2025 — Jan 2026</span></div>
+            <p class="t-org">Dayasara Entertainment Pvt. Ltd.</p>
+            <ul class="t-list">
+              <li>Contributed to the existing website, fixing bugs and optimizing performance.</li>
+              <li>Assigned to work on full-stack projects including a fantasy app &amp; an e-commerce website.</li>
+              <li>Developed and maintained web applications.</li>
+              <li>Optimized application performance and enhanced overall functionality.</li>
+            </ul>
+          </li>
+          <li class="t-item">
+            <div class="t-head"><h4>Software Developer Intern</h4><span class="t-period">Jan 2024 — Mar 2024</span></div>
+            <p class="t-org">KIDA Studios, Pune</p>
+            <ul class="t-list">
+              <li>Created a generalized organization management system to manage organizations, teams, users, and repositories — similar in function to GitHub.</li>
+              <li>Worked with the backend team on an ongoing stock project.</li>
+              <li>Developed user management features.</li>
+              <li>Integrated reporting system and ticketing system.</li>
+              <li>Did admin panel enhancements.</li>
+            </ul>
+          </li>
+        </ol>
+      </section>
+
+      <section class="timeline">
+        <p class="eyebrow">$ ls education/<span class="blink">_</span></p>
+        <ol class="timeline-list">
+          <li class="t-item">
+            <div class="t-head"><h4>Bharati Vidyapeeth College of Engineering, Pune</h4><span class="t-period">2021 — 2025</span></div>
+            <p class="t-note">B.Tech Computer Engineering — 8.9 CGPA</p>
+          </li>
+          <li class="t-item">
+            <div class="t-head"><h4>Sree Ayyappa Public School, BKSC, Jharkhand</h4><span class="t-period">2019 — 2021</span></div>
+            <p class="t-note">12th Grade — 84%</p>
+          </li>
+        </ol>
+      </section>
+
+      <section class="skills-block">
+        <p class="eyebrow">$ cat skills/core.json<span class="blink">_</span></p>
+        <div class="meter-grid">
+          <div class="meter"><div class="m-head"><span>Web Development</span><b>80%</b></div><div class="meter-bg"><div class="meter-fill" data-fill="80"></div></div></div>
+          <div class="meter"><div class="m-head"><span>Database Management</span><b>70%</b></div><div class="meter-bg"><div class="meter-fill" data-fill="70"></div></div></div>
+          <div class="meter"><div class="m-head"><span>Backend Development</span><b>90%</b></div><div class="meter-bg"><div class="meter-fill" data-fill="90"></div></div></div>
+          <div class="meter"><div class="m-head"><span>Python</span><b>80%</b></div><div class="meter-bg"><div class="meter-fill" data-fill="80"></div></div></div>
+          <div class="meter"><div class="m-head"><span>Cloud Computing</span><b>60%</b></div><div class="meter-bg"><div class="meter-fill" data-fill="60"></div></div></div>
+          <div class="meter"><div class="m-head"><span>DevSecOps</span><b>65%</b></div><div class="meter-bg"><div class="meter-fill" data-fill="65"></div></div></div>
+          <div class="meter"><div class="m-head"><span>Cybersecurity</span><b>55%</b></div><div class="meter-bg"><div class="meter-fill" data-fill="55"></div></div></div>
+        </div>
+      </section>
+
+      <section class="skills-block">
+        <p class="eyebrow">$ cat skills/devsecops.json<span class="blink">_</span></p>
+        <div class="chip-cluster">
+          <span class="chip sec"><span class="sq"></span>DevSecOps Practices</span>
+          <span class="chip sec"><span class="sq"></span>CI/CD Pipeline Security</span>
+          <span class="chip sec"><span class="sq"></span>SAST / DAST Scanning</span>
+          <span class="chip sec"><span class="sq"></span>Vulnerability Assessment</span>
+          <span class="chip sec"><span class="sq"></span>Cloud Security (AWS)</span>
+          <span class="chip sec"><span class="sq"></span>HashiCorp Vault</span>
+          <span class="chip sec"><span class="sq"></span>Vault Radar</span>
+          <span class="chip sec"><span class="sq"></span>Snyk</span>
+          <span class="chip sec"><span class="sq"></span>GitLab CI</span>
+          <span class="chip"><span class="sq"></span>Python Scripting &amp; Automation</span>
+          <span class="chip"><span class="sq"></span>Bash Scripting</span>
+          <span class="chip"><span class="sq"></span>Cloud &amp; DevOps CLI (AWS CLI, kubectl, Docker CLI)</span>
+        </div>
+      </section>
+
+      <section class="skills-block">
+        <p class="eyebrow">$ cat skills/agile.json<span class="blink">_</span></p>
+        <div class="chip-cluster">
+          <span class="chip agile"><span class="sq"></span>Scaled Agile (SAFe)</span>
+          <span class="chip agile"><span class="sq"></span>Jira</span>
+          <span class="chip agile"><span class="sq"></span>Sprint &amp; PI Planning</span>
+          <span class="chip agile"><span class="sq"></span>Git &amp; GitHub</span>
+          <span class="chip agile"><span class="sq"></span>GitLab</span>
+        </div>
+      </section>
+    </section>
+
+    <!-- ================= PORTFOLIO / CASE STUDIES ================= -->
+    <section id="portfolio" class="page">
+      <header><h2 class="h2">Selected Work</h2><p class="h2-lede">Click "Case study" on any project for the problem, stack, security notes, and results.</p></header>
+
+      <p class="eyebrow">$ ls projects/ --filter<span class="blink">_</span></p>
+      <ul class="filter-list" data-filters>
+        <li><button class="active" data-filter="all">All</button></li>
+        <li><button data-filter="backend development">Backend Development</button></li>
+        <li><button data-filter="applications">Applications</button></li>
+        <li><button data-filter="web development">Web Development</button></li>
+      </ul>
+
+      <ul class="project-list" data-project-list>
+
+        <li class="project-item show" data-category="web development">
+          <div class="p-card">
+            <a href="https://zirvanaonline.com/" target="_blank" rel="noopener">
+              <figure class="p-img"><img src="./assets/images/Zirvana.png" alt="Zirvanaa" loading="lazy" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';"><div class="p-fallback">Z</div><span class="p-badge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M7 7h10v10"/></svg></span></figure>
+            </a>
+            <div class="p-body">
+              <p class="p-cat">Web development</p><h3 class="p-title">Zirvanaa — Ecommerce</h3>
+              <button class="p-case-btn" data-case="zirvana"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 6h16M4 12h16M4 18h10"/></svg>Case study</button>
+            </div>
+          </div>
+        </li>
+
+        <li class="project-item show" data-category="web development">
+          <div class="p-card">
+            <a href="https://zstar25pro.com/" target="_blank" rel="noopener">
+              <figure class="p-img"><img src="./assets/images/Star25pro.png" alt="Star25Pro" loading="lazy" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';"><div class="p-fallback">S</div><span class="p-badge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M7 7h10v10"/></svg></span></figure>
+            </a>
+            <div class="p-body">
+              <p class="p-cat">Web development</p><h3 class="p-title">Star25Pro</h3>
+              <button class="p-case-btn" data-case="star25"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 6h16M4 12h16M4 18h10"/></svg>Case study</button>
+            </div>
+          </div>
+        </li>
+
+        <li class="project-item show" data-category="web development">
+          <div class="p-card">
+            <a href="https://triptastictour.co.in/" target="_blank" rel="noopener">
+              <figure class="p-img"><img src="./assets/images/Triptastic.png" alt="Triptastic" loading="lazy" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';"><div class="p-fallback">T</div><span class="p-badge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M7 7h10v10"/></svg></span></figure>
+            </a>
+            <div class="p-body">
+              <p class="p-cat">Web development</p><h3 class="p-title">Triptastic</h3>
+              <button class="p-case-btn" data-case="triptastic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 6h16M4 12h16M4 18h10"/></svg>Case study</button>
+            </div>
+          </div>
+        </li>
+
+        <li class="project-item show" data-category="web development">
+          <div class="p-card">
+            <a href="https://99giftcards.com/" target="_blank" rel="noopener">
+              <figure class="p-img"><img src="./assets/images/Giftcard.png" alt="Gift Card" loading="lazy" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';"><div class="p-fallback">G</div><span class="p-badge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M7 7h10v10"/></svg></span></figure>
+            </a>
+            <div class="p-body">
+              <p class="p-cat">Web development</p><h3 class="p-title">Gift Card</h3>
+              <button class="p-case-btn" data-case="giftcard"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 6h16M4 12h16M4 18h10"/></svg>Case study</button>
+            </div>
+          </div>
+        </li>
+
+        <li class="project-item show" data-category="applications">
+          <div class="p-card">
+            <a href="https://zstar25pro.com/" target="_blank" rel="noopener">
+              <figure class="p-img"><img src="./assets/images/fantasy1.jpg" alt="Fantasy App" loading="lazy" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';"><div class="p-fallback">F</div><span class="p-badge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M7 7h10v10"/></svg></span></figure>
+            </a>
+            <div class="p-body">
+              <p class="p-cat">Applications</p><h3 class="p-title">Fantasy App</h3>
+              <button class="p-case-btn" data-case="fantasy"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 6h16M4 12h16M4 18h10"/></svg>Case study</button>
+            </div>
+          </div>
+        </li>
+
+        <li class="project-item show" data-category="applications">
+          <div class="p-card">
+            <a href="https://zstar25pro.com/" target="_blank" rel="noopener"><figure class="p-img"><img src="./assets/images/fantasy3.jpg" alt="Fantasy App" loading="lazy" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';"><div class="p-fallback">F</div><span class="p-badge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M7 7h10v10"/></svg></span></figure></a>
+            <div class="p-body"><p class="p-cat">Applications</p><h3 class="p-title">Fantasy App</h3></div>
+          </div>
+        </li>
+
+        <li class="project-item show" data-category="applications">
+          <div class="p-card">
+            <a href="https://zstar25pro.com/" target="_blank" rel="noopener"><figure class="p-img"><img src="./assets/images/fantasy2.jpg" alt="Fantasy App" loading="lazy" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';"><div class="p-fallback">F</div><span class="p-badge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M7 7h10v10"/></svg></span></figure></a>
+            <div class="p-body"><p class="p-cat">Applications</p><h3 class="p-title">Fantasy App</h3></div>
+          </div>
+        </li>
+
+        <li class="project-item show" data-category="web development">
+          <div class="p-card">
+            <a href="https://snake-game-04.web.app/" target="_blank" rel="noopener"><figure class="p-img"><img src="./assets/images/SnakeGame.jpg" alt="Snake Game" loading="lazy" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';"><div class="p-fallback">SG</div><span class="p-badge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M7 7h10v10"/></svg></span></figure></a>
+            <div class="p-body"><p class="p-cat">Web development</p><h3 class="p-title">SnakeGame</h3></div>
+          </div>
+        </li>
+
+        <li class="project-item show" data-category="web development">
+          <div class="p-card">
+            <a href="https://github.com/Aditya-0411/POS-and-Billing-frontend" target="_blank" rel="noopener"><figure class="p-img"><img src="./assets/images/POS&billing.jpg" alt="POS & Billing" loading="lazy" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';"><div class="p-fallback">P</div><span class="p-badge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M7 7h10v10"/></svg></span></figure></a>
+            <div class="p-body">
+              <p class="p-cat">Web development</p><h3 class="p-title">POS &amp; Billing Software</h3>
+              <button class="p-case-btn" data-case="pos"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 6h16M4 12h16M4 18h10"/></svg>Case study</button>
+            </div>
+          </div>
+        </li>
+
+        <li class="project-item show" data-category="backend development">
+          <div class="p-card">
+            <a href="https://github.com/Aditya-0411/CARPROJECT" target="_blank" rel="noopener"><figure class="p-img"><img src="./assets/images/backend1.jpg" alt="Car Data App" loading="lazy" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';"><div class="p-fallback">C</div><span class="p-badge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M7 7h10v10"/></svg></span></figure></a>
+            <div class="p-body">
+              <p class="p-cat">Backend Development</p><h3 class="p-title">Car Data App</h3>
+              <button class="p-case-btn" data-case="cardata"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 6h16M4 12h16M4 18h10"/></svg>Case study</button>
+            </div>
+          </div>
+        </li>
+
+        <li class="project-item show" data-category="backend development">
+          <div class="p-card">
+            <a href="https://github.com/Aditya-0411/Stock-Project" target="_blank" rel="noopener"><figure class="p-img"><img src="./assets/images/backend2.jpg" alt="Stock App" loading="lazy" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';"><div class="p-fallback">S</div><span class="p-badge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M7 7h10v10"/></svg></span></figure></a>
+            <div class="p-body">
+              <p class="p-cat">Backend Development</p><h3 class="p-title">Stock App</h3>
+              <button class="p-case-btn" data-case="stock"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 6h16M4 12h16M4 18h10"/></svg>Case study</button>
+            </div>
+          </div>
+        </li>
+
+        <li class="project-item show" data-category="backend development">
+          <div class="p-card">
+            <a href="https://github.com/Aditya-0411/Organization-Management-System" target="_blank" rel="noopener"><figure class="p-img"><img src="./assets/images/backend3.jpg" alt="Org Management" loading="lazy" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';"><div class="p-fallback">O</div><span class="p-badge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M7 7h10v10"/></svg></span></figure></a>
+            <div class="p-body">
+              <p class="p-cat">Backend Development</p><h3 class="p-title">Org-Management</h3>
+              <button class="p-case-btn" data-case="orgmgmt"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 6h16M4 12h16M4 18h10"/></svg>Case study</button>
+            </div>
+          </div>
+        </li>
+
+      </ul>
+
+      <div class="case-detail" id="caseDetail">
+        <div class="case-detail-head">
+          <h3 id="caseTitle">Project</h3>
+          <button class="close-case" id="closeCase">Close ✕</button>
+        </div>
+        <div class="case-grid">
+          <div class="case-block"><h5>Overview</h5><p id="caseOverview"></p></div>
+          <div class="case-block"><h5>Problem statement</h5><p id="caseProblem"></p></div>
+          <div class="case-block"><h5>Tech stack</h5><ul id="caseStack"></ul></div>
+          <div class="case-block"><h5>Security measures</h5><ul id="caseSecurity"></ul></div>
+          <div class="case-block"><h5>Deployment</h5><p id="caseDeploy"></p></div>
+          <div class="case-block"><h5>Results</h5><p id="caseResults"></p></div>
+        </div>
+        <div class="case-links" id="caseLinks"></div>
+      </div>
+    </section>
+
+    <!-- ================= CONTACT ================= -->
+    <section id="contact" class="page">
+      <header><h2 class="h2">Contact</h2></header>
+
+      <div class="contact-cta">
+        <h3>Let's build secure, scalable, and reliable systems together.</h3>
+        <p>Open to full-stack, backend, DevSecOps, and cloud opportunities. Reach out, or grab the resume below.</p>
+      </div>
+
+      <p class="eyebrow">$ ./send-message.sh<span class="blink">_</span></p>
+
+      <div class="contact-grid">
+        <div class="contact-info-card">
+          <div class="contact-row">
+            <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 6l9 7 9-7M4 5h16a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V6a1 1 0 0 1 1-1z"/></svg></span>
+            <div class="meta"><p>Email</p><a href="mailto:adityamishra0411@gmail.com">adityamishra0411@gmail.com</a></div>
+          </div>
+          <div class="contact-row">
+            <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M7 2h10a1 1 0 0 1 1 1v18a1 1 0 0 1-1 1H7a1 1 0 0 1-1-1V3a1 1 0 0 1 1-1z"/></svg></span>
+            <div class="meta"><p>Phone</p><a href="tel:+918092874359">+91 8092874359</a></div>
+          </div>
+          <div class="contact-row">
+            <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 21s-7-6.1-7-11a7 7 0 1 1 14 0c0 4.9-7 11-7 11z"/><circle cx="12" cy="10" r="2.4"/></svg></span>
+            <div class="meta"><p>Location</p><span>Pune, Maharashtra, India</span></div>
+          </div>
+          <a class="resume-dl" href="./assets/Aditya_Mishra_Resume.pdf" download><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3v12m0 0l-4-4m4 4l4-4M5 21h14"/></svg>Download Resume</a>
+          <div class="social-row" style="margin-top:.4rem;">
+            <a href="https://github.com/Aditya-0411" target="_blank" aria-label="GitHub"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a10 10 0 0 0-3.16 19.5c.5.1.68-.22.68-.48v-1.7c-2.78.6-3.37-1.34-3.37-1.34-.46-1.16-1.11-1.47-1.11-1.47-.9-.62.07-.6.07-.6 1 .07 1.53 1.03 1.53 1.03.89 1.52 2.34 1.08 2.91.83.09-.65.35-1.08.63-1.33-2.22-.25-4.56-1.11-4.56-4.95 0-1.1.39-1.99 1.03-2.69-.1-.25-.45-1.28.1-2.66 0 0 .84-.27 2.75 1.02a9.5 9.5 0 0 1 5 0c1.91-1.3 2.75-1.02 2.75-1.02.55 1.38.2 2.41.1 2.66.64.7 1.03 1.59 1.03 2.69 0 3.85-2.35 4.7-4.58 4.94.36.31.68.92.68 1.85v2.75c0 .26.18.58.69.48A10 10 0 0 0 12 2z"/></svg></a>
+            <a href="https://www.linkedin.com/in/aditya-mishra0411/" target="_blank" aria-label="LinkedIn"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M6.94 8.5H3.56V20h3.38V8.5zM5.25 3a1.96 1.96 0 1 0 0 3.92A1.96 1.96 0 0 0 5.25 3zM20.45 20h-3.37v-5.6c0-1.34-.02-3.06-1.87-3.06-1.87 0-2.16 1.46-2.16 2.96V20H9.68V8.5h3.24v1.57h.05c.45-.86 1.56-1.77 3.2-1.77 3.43 0 4.28 2.26 4.28 5.19V20z"/></svg></a>
+          </div>
+        </div>
+
+        <form action="#" class="form" data-form>
+          <div class="input-wrapper">
+            <input type="text" name="fullname" class="form-input" placeholder="Full name" required data-form-input>
+            <input type="email" name="email" class="form-input" placeholder="Email address" required data-form-input>
+          </div>
+          <textarea name="message" class="form-input" placeholder="Your message" required data-form-input></textarea>
+          <button class="form-btn" type="submit" disabled data-form-btn>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 2L11 13M22 2l-7 20-4-9-9-4z"/></svg>
+            <span>Send message</span>
+          </button>
+        </form>
+      </div>
+    </section>
+
   </main>
+</div>
 
-  <!-- custom js -->
-  <script src="./assets/js/script.js"></script>
+<!-- MOBILE BOTTOM NAV -->
+<nav class="bottom-nav" data-dock>
+  <button class="dock-btn active" data-nav-link data-target="about" aria-label="About"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="8" r="3.2"/><path d="M5 20c0-3.6 3.1-6 7-6s7 2.4 7 6"/></svg><span>about</span></button>
+  <button class="dock-btn" data-nav-link data-target="ops" aria-label="Ops"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M13 2 3 14h7l-1 8 10-12h-7l1-8z"/></svg><span>ops</span></button>
+  <button class="dock-btn" data-nav-link data-target="radar" aria-label="Radar"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/><path d="M12 12l6-6"/></svg><span>radar</span></button>
+  <button class="dock-btn" data-nav-link data-target="resume" aria-label="Resume"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M6 2h9l3 3v17H6z"/><path d="M14 2v4h4M9 12h6M9 16h6M9 8h2"/></svg><span>resume</span></button>
+  <button class="dock-btn" data-nav-link data-target="portfolio" aria-label="Work"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg><span>work</span></button>
+  <button class="dock-btn" data-nav-link data-target="contact" aria-label="Contact"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 6l9 7 9-7M4 5h16a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V6a1 1 0 0 1 1-1z"/></svg><span>contact</span></button>
+</nav>
 
-  <!-- ionicons -->
-  <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
-  <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+<script>
+(function(){
+  "use strict";
+
+  /* ================= PAGE NAVIGATION ================= */
+  var navBtns = document.querySelectorAll('[data-nav-link]');
+  var pages = document.querySelectorAll('.page');
+  var initialized = {};
+
+  function goTo(target){
+    pages.forEach(function(p){ p.classList.toggle('active', p.id === target); });
+    navBtns.forEach(function(b){ b.classList.toggle('active', b.dataset.target === target); });
+    window.scrollTo({top:0, behavior:'auto'});
+    if(target === 'resume') animateMeters();
+    if(target === 'ops' && !initialized.ops){ initialized.ops = true; buildPipeline(); animateScoreRing(); }
+    if(target === 'radar' && !initialized.radar){ initialized.radar = true; buildRadar(); fetchGitHub(); animateAchCounters(); }
+  }
+  navBtns.forEach(function(btn){ btn.addEventListener('click', function(){ goTo(btn.dataset.target); }); });
+
+  /* ================= TYPED WHOAMI LINE ================= */
+  var typedEl = document.getElementById('typed-line');
+  var fullText = "Aditya Mishra — full-stack developer transitioning into DevSecOps, Cloud & Platform Engineering. Currently a DevSecOps Trainee at TCS.";
+  var ti = 0;
+  function typeStep(){
+    if(ti <= fullText.length){
+      typedEl.innerHTML = fullText.slice(0, ti) + '<span class="tcaret"></span>';
+      ti++;
+      setTimeout(typeStep, 20);
+    }
+  }
+  typeStep();
+
+  /* ================= HERO STAT COUNTERS ================= */
+  var heroCounted = false;
+  function animateHeroStats(){
+    if(heroCounted) return; heroCounted = true;
+    document.querySelectorAll('#about [data-count]').forEach(countUpEl);
+  }
+  function countUpEl(el){
+    var target = parseInt(el.dataset.count, 10);
+    var cur = 0, step = Math.max(target/40, .5);
+    function tick(){
+      cur += step;
+      if(cur >= target){ el.textContent = target; return; }
+      el.textContent = Math.floor(cur);
+      requestAnimationFrame(tick);
+    }
+    tick();
+  }
+  if('IntersectionObserver' in window){
+    var heroObs = new IntersectionObserver(function(e){ if(e[0].isIntersecting) animateHeroStats(); }, {threshold:.3});
+    var statGridEl = document.querySelector('#about .stat-grid');
+    if(statGridEl) heroObs.observe(statGridEl);
+  } else { animateHeroStats(); }
+
+  function animateAchCounters(){
+    document.querySelectorAll('#radar .ach-card [data-count]').forEach(countUpEl);
+  }
+
+  /* ================= SKILL METERS ================= */
+  var metersAnimated = false;
+  function animateMeters(){
+    if(metersAnimated) return; metersAnimated = true;
+    document.querySelectorAll('.meter-fill').forEach(function(el){
+      requestAnimationFrame(function(){ el.style.width = el.dataset.fill + '%'; });
+    });
+  }
+
+  /* ================= INTERACTIVE TERMINAL ================= */
+  var termBody = document.getElementById('termBody');
+  var termInput = document.getElementById('termInput');
+  var history = [];
+  var histIdx = -1;
+
+  var commands = {
+    help: "Available commands:\n  <span class='k'>whoami</span>        — who I am\n  <span class='k'>skills</span>        — technical skillset\n  <span class='k'>experience</span>    — work history\n  <span class='k'>projects</span>      — selected projects\n  <span class='k'>devsecops</span>     — DevSecOps focus areas\n  <span class='k'>aws</span>           — cloud experience\n  <span class='k'>cli</span>           — cloud & DevOps CLI experience\n  <span class='k'>docker</span>        — containerization\n  <span class='k'>kubernetes</span>    — orchestration learning\n  <span class='k'>security</span>      — security practices\n  <span class='k'>resume</span>        — download resume\n  <span class='k'>contact</span>       — get in touch\n  <span class='k'>github</span>        — open GitHub profile\n  <span class='k'>linkedin</span>      — open LinkedIn profile\n  <span class='k'>clear</span>         — clear the terminal",
+    whoami: "<b>Aditya Mishra</b> — Full-stack developer & DevSecOps Trainee at TCS.\nBased in Pune, Maharashtra, India. Transitioning toward Cloud Security & Platform Engineering.",
+    skills: "Python · Java · JavaScript · React · Django · FastAPI · Spring Boot\nDocker · Kubernetes · AWS · GCP · Azure · Terraform · Linux · Git\nGitHub Actions · GitLab CI · Jenkins · Nginx · CI/CD · DevSecOps\nOWASP · HashiCorp Vault · Vault Radar · Snyk · REST APIs · SQL",
+    experience: "<b>DevSecOps Trainee</b> — TCS (Feb 2026 — Present)\n<b>Full Stack Web Developer</b> — Dayasara Entertainment (Mar 2025 — Jan 2026)\n<b>Software Developer Intern</b> — KIDA Studios (Jan 2024 — Mar 2024)",
+    projects: "Zirvanaa (Ecommerce) · Star25Pro · Triptastic · Gift Card · Fantasy App\nPOS & Billing Software · Car Data App · Stock App · Org-Management\nRun 'cd portfolio' — open the Work tab from the dock to see case studies.",
+    devsecops: "Focus areas: CI/CD pipeline security (GitHub Actions & GitLab CI), Python\nautomation for security checks, vulnerability assessment, SAST/DAST awareness,\nsecrets management with HashiCorp Vault & Vault Radar, dependency scanning\nwith Snyk, and Scaled Agile (SAFe) delivery via Jira/GitLab.",
+    aws: "Hands-on with EC2, S3, and RDS — deploying and managing web applications\nwith a growing foundation in cloud architecture and security fundamentals.\nAlso building conceptual familiarity with GCP and Azure.",
+    cli: "Comfortable driving cloud & DevOps workflows straight from the terminal —\nAWS CLI, kubectl, Docker CLI, Terraform CLI, and Git/GitLab CLI for day-to-day\nDevSecOps tasks and automation scripting.",
+    docker: "Comfortable containerizing applications with Docker; learning Kubernetes\nfor orchestration as part of the DevSecOps/platform engineering path.",
+    kubernetes: "Currently building Kubernetes-based deployment projects — status: in progress.",
+    security: "OWASP awareness, vulnerability assessment & remediation tracking,\nsecrets hygiene with HashiCorp Vault & Vault Radar, dependency scanning\nwith Snyk, and secure SDLC practices as part of DevSecOps work at TCS.",
+    resume: "Opening resume download…",
+    contact: "Email: adityamishra0411@gmail.com · Phone: +91 8092874359\nLocation: Pune, Maharashtra, India",
+    github: "Opening github.com/Aditya-0411 …",
+    linkedin: "Opening linkedin.com/in/aditya-mishra0411 …"
+  };
+
+  function printLine(html, isCommand){
+    var p = document.createElement('p');
+    p.className = 'ln out';
+    p.innerHTML = html;
+    termBody.appendChild(p);
+    termBody.scrollTop = termBody.scrollHeight;
+  }
+  function printPrompt(cmd){
+    var p = document.createElement('p');
+    p.className = 'ln';
+    p.innerHTML = '<span class="prompt">❯</span> <span class="path">~/portfolio</span> ' + cmd;
+    termBody.appendChild(p);
+    termBody.scrollTop = termBody.scrollHeight;
+  }
+  function runCommand(raw){
+    var cmd = raw.trim().toLowerCase();
+    if(!cmd) return;
+    printPrompt(raw);
+    history.push(raw); histIdx = history.length;
+    if(cmd === 'clear'){ termBody.innerHTML=''; return; }
+    if(cmd === 'resume'){ printLine(commands.resume); window.open('./assets/Aditya_Mishra_Resume.pdf','_blank'); return; }
+    if(cmd === 'github'){ printLine(commands.github); window.open('https://github.com/Aditya-0411','_blank'); return; }
+    if(cmd === 'linkedin'){ printLine(commands.linkedin); window.open('https://www.linkedin.com/in/aditya-mishra0411/','_blank'); return; }
+    if(commands[cmd]){ printLine(commands[cmd]); return; }
+    printLine("command not found: <b>" + cmd.replace(/</g,'&lt;') + "</b> — type <span class='k'>help</span> for a list of commands.");
+  }
+  if(termInput){
+    termInput.addEventListener('keydown', function(e){
+      if(e.key === 'Enter'){ runCommand(termInput.value); termInput.value=''; }
+      else if(e.key === 'ArrowUp'){ if(histIdx>0){ histIdx--; termInput.value = history[histIdx] || ''; } e.preventDefault(); }
+      else if(e.key === 'ArrowDown'){ if(histIdx<history.length-1){ histIdx++; termInput.value = history[histIdx] || ''; } else { histIdx = history.length; termInput.value=''; } e.preventDefault(); }
+    });
+    document.getElementById('about').addEventListener('click', function(){ termInput.focus(); });
+  }
+
+  /* ================= OPS: PIPELINE VISUALIZER ================= */
+  var pipelineSteps = [
+    {label:'Developer', icon:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="8" r="3.2"/><path d="M5 20c0-3.6 3.1-6 7-6s7 2.4 7 6"/></svg>'},
+    {label:'GitHub', icon:'<svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a10 10 0 0 0-3.16 19.5c.5.1.68-.22.68-.48v-1.7c-2.78.6-3.37-1.34-3.37-1.34-.46-1.16-1.11-1.47-1.11-1.47-.9-.62.07-.6.07-.6 1 .07 1.53 1.03 1.53 1.03.89 1.52 2.34 1.08 2.91.83.09-.65.35-1.08.63-1.33-2.22-.25-4.56-1.11-4.56-4.95 0-1.1.39-1.99 1.03-2.69-.1-.25-.45-1.28.1-2.66 0 0 .84-.27 2.75 1.02a9.5 9.5 0 0 1 5 0c1.91-1.3 2.75-1.02 2.75-1.02.55 1.38.2 2.41.1 2.66.64.7 1.03 1.59 1.03 2.69 0 3.85-2.35 4.7-4.58 4.94.36.31.68.92.68 1.85v2.75c0 .26.18.58.69.48A10 10 0 0 0 12 2z"/></svg>'},
+    {label:'GitHub Actions', icon:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M13 2 3 14h7l-1 8 10-12h-7l1-8z"/></svg>'},
+    {label:'Build', icon:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.75-3.75a5.5 5.5 0 0 1-7.7 7.7L4.7 22.3l-3-3L10.7 8.3a5.5 5.5 0 0 1 7.7-7.7z"/></svg>'},
+    {label:'Unit Testing', icon:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M9 12l2 2 4-4"/><circle cx="12" cy="12" r="9"/></svg>'},
+    {label:'SonarQube', icon:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.35-4.35"/></svg>'},
+    {label:'SAST', icon:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M16 18l6-6-6-6M8 6l-6 6 6 6"/></svg>'},
+    {label:'Dependency Scan', icon:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 21V7l8-4 8 4v14"/></svg>'},
+    {label:'Docker Build', icon:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="7" width="18" height="13" rx="1"/><path d="M7 7V5a2 2 0 0 1 2-2h6a2 2 0 0 1 2 2v2"/></svg>'},
+    {label:'Trivy Scan', icon:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="5" y="11" width="14" height="9" rx="1.5"/><path d="M8 11V8a4 4 0 1 1 8 0v3"/></svg>'},
+    {label:'Deploy', icon:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M5 13l4 4L19 7"/></svg>'},
+    {label:'Kubernetes', icon:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="9"/><path d="M12 3v18M3 12h18"/></svg>'},
+    {label:'Monitoring', icon:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 17l4-6 4 3 5-8 5 6"/></svg>'}
+  ];
+  function buildPipeline(){
+    var row = document.getElementById('cdRow');
+    row.innerHTML = '';
+    pipelineSteps.forEach(function(step, i){
+      var el = document.createElement('div');
+      el.className = 'cd-step'; el.id = 'cds-'+i;
+      el.innerHTML = '<div class="cd-node">'+step.icon+'<span class="cd-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg></span></div><small>'+step.label+'</small>';
+      row.appendChild(el);
+      if(i < pipelineSteps.length-1){
+        var conn = document.createElement('div');
+        conn.className = 'cd-connector'; conn.id = 'cdc-'+i;
+        row.appendChild(conn);
+      }
+    });
+    runPipeline();
+  }
+  var pipelineRunning = false;
+  function runPipeline(){
+    if(pipelineRunning) return; pipelineRunning = true;
+    pipelineSteps.forEach(function(_, i){
+      var s = document.getElementById('cds-'+i); if(s) s.classList.remove('on');
+      var c = document.getElementById('cdc-'+i); if(c) c.classList.remove('on');
+    });
+    var pipelineWrap = document.getElementById('cdPipeline');
+    if(pipelineWrap) pipelineWrap.scrollTo({left:0, behavior:'smooth'});
+    pipelineSteps.forEach(function(_, i){
+      setTimeout(function(){
+        var s = document.getElementById('cds-'+i); if(s) s.classList.add('on');
+        var c = document.getElementById('cdc-'+i); if(c) c.classList.add('on');
+        if(s && pipelineWrap){
+          s.scrollIntoView({behavior:'smooth', inline:'center', block:'nearest'});
+        }
+        if(i === pipelineSteps.length-1) pipelineRunning = false;
+      }, i * 260);
+    });
+  }
+  var replayBtn = document.getElementById('cdReplay');
+  if(replayBtn) replayBtn.addEventListener('click', runPipeline);
+
+  function animateScoreRing(){
+    var ring = document.getElementById('scoreRing');
+    if(!ring) return;
+    var circumference = 2 * Math.PI * 27;
+    var score = 92;
+    var offset = circumference - (score/100)*circumference;
+    requestAnimationFrame(function(){ ring.style.strokeDashoffset = offset; });
+  }
+
+  /* ================= RADAR CHART ================= */
+  function buildRadar(){
+    var cats = [
+      {name:'Programming', value:75},
+      {name:'Frontend', value:60},
+      {name:'Backend', value:70},
+      {name:'Cloud', value:50},
+      {name:'DevOps', value:55},
+      {name:'Security', value:50},
+      {name:'Tools', value:70}
+    ];
+    var svg = document.getElementById('radarSvg');
+    var wrap = document.getElementById('radarWrap');
+    var cx = 160, cy = 160, R = 110;
+    var n = cats.length;
+    function pt(i, r){
+      var angle = (-90 + i * (360/n)) * Math.PI/180;
+      return [cx + r*Math.cos(angle), cy + r*Math.sin(angle)];
+    }
+    var svgNS = 'http://www.w3.org/2000/svg';
+    function makeEl(tag, attrs){
+      var el = document.createElementNS(svgNS, tag);
+      Object.keys(attrs).forEach(function(k){ el.setAttribute(k, attrs[k]); });
+      return el;
+    }
+    // grid rings
+    [0.25,0.5,0.75,1].forEach(function(frac){
+      var pts = [];
+      for(var i=0;i<n;i++){ var p = pt(i, R*frac); pts.push(p[0]+','+p[1]); }
+      svg.appendChild(makeEl('polygon', {points: pts.join(' '), fill:'none', stroke:'var(--line)', 'stroke-width':'1'}));
+    });
+    // axis lines
+    for(var i=0;i<n;i++){
+      var p = pt(i, R);
+      svg.appendChild(makeEl('line', {x1:cx, y1:cy, x2:p[0], y2:p[1], stroke:'var(--line)', 'stroke-width':'1'}));
+    }
+    // data polygon
+    var dataPts = [];
+    for(var i=0;i<n;i++){ var p = pt(i, R*(cats[i].value/100)); dataPts.push(p[0]+','+p[1]); }
+    svg.appendChild(makeEl('polygon', {points: dataPts.join(' '), fill:'rgba(52,224,161,.16)', stroke:'var(--accent)', 'stroke-width':'2'}));
+    // data points
+    for(var i=0;i<n;i++){
+      var p = pt(i, R*(cats[i].value/100));
+      svg.appendChild(makeEl('circle', {cx:p[0], cy:p[1], r:3.5, fill:'var(--accent)'}));
+    }
+    // labels (HTML, absolutely positioned)
+    for(var i=0;i<n;i++){
+      var p = pt(i, R+34);
+      var lbl = document.createElement('div');
+      lbl.className = 'radar-label';
+      lbl.style.left = p[0] + 'px'; lbl.style.top = p[1] + 'px';
+      lbl.innerHTML = '<b>'+cats[i].name+'</b>'+cats[i].value+'%';
+      wrap.appendChild(lbl);
+    }
+  }
+
+  /* ================= GITHUB LIVE STATS ================= */
+  function fetchGitHub(){
+    var statsWrap = document.getElementById('ghStats');
+    var reposWrap = document.getElementById('ghRepos');
+    var note = document.getElementById('ghNote');
+    fetch('https://api.github.com/users/Aditya-0411')
+      .then(function(r){ if(!r.ok) throw new Error('user'); return r.json(); })
+      .then(function(user){
+        var since = user.created_at ? new Date(user.created_at).getFullYear() : '—';
+        statsWrap.innerHTML =
+          '<div class="gh-stat"><b>'+(user.public_repos ?? '—')+'</b><span>Public repos</span></div>'+
+          '<div class="gh-stat"><b>'+(user.followers ?? '—')+'</b><span>Followers</span></div>'+
+          '<div class="gh-stat"><b>'+(user.following ?? '—')+'</b><span>Following</span></div>'+
+          '<div class="gh-stat"><b>'+since+'</b><span>Member since</span></div>';
+        note.textContent = 'Live data from api.github.com — updates automatically.';
+        return fetch('https://api.github.com/users/Aditya-0411/repos?sort=updated&per_page=6');
+      })
+      .then(function(r){ if(!r || !r.ok) throw new Error('repos'); return r.json(); })
+      .then(function(repos){
+        if(!Array.isArray(repos) || !repos.length){ reposWrap.innerHTML = '<p class="gh-note">No public repositories found.</p>'; return; }
+        reposWrap.innerHTML = repos.map(function(r){
+          return '<div class="gh-repo"><a href="'+r.html_url+'" target="_blank">'+r.name+'</a><span class="gh-meta"><span>★ '+r.stargazers_count+'</span><span>'+(r.language || '—')+'</span></span></div>';
+        }).join('');
+      })
+      .catch(function(){
+        note.textContent = 'Live GitHub data is unavailable right now (rate limit or network) — view the profile directly.';
+      });
+  }
+
+  /* ================= PORTFOLIO FILTER ================= */
+  var filterBtns = document.querySelectorAll('[data-filter]');
+  var projectItems = document.querySelectorAll('.project-item');
+  filterBtns.forEach(function(btn){
+    btn.addEventListener('click', function(){
+      filterBtns.forEach(function(b){ b.classList.remove('active'); });
+      btn.classList.add('active');
+      var f = btn.dataset.filter;
+      projectItems.forEach(function(item){
+        item.classList.toggle('show', f === 'all' || item.dataset.category === f);
+      });
+    });
+  });
+
+  /* ================= CASE STUDIES ================= */
+  var caseData = {
+    zirvana: {
+      title:'Zirvanaa — Ecommerce',
+      overview:'A production ecommerce storefront built for a live business, covering catalog browsing, cart, and checkout flows.',
+      problem:'The client needed a fast, mobile-friendly storefront to sell products online without relying on a third-party marketplace.',
+      stack:['HTML/CSS/JavaScript frontend','Backend API integration','Responsive, mobile-first layout'],
+      security:['HTTPS enforced in production','Input validation on forms','Environment-based configuration (no hardcoded secrets)'],
+      deploy:'Deployed to a production domain (zirvanaonline.com) and actively serving real customers.',
+      results:'Live, production ecommerce site in active use.',
+      github:'', live:'https://zirvanaonline.com/'
+    },
+    star25:{
+      title:'Star25Pro',
+      overview:'A production web application supporting a fantasy-sports style product line.',
+      problem:'Needed a reliable full-stack web app that could handle real users at production scale.',
+      stack:['Full-stack web application','REST API integration','Production hosting'],
+      security:['HTTPS in production','Session/auth handling','Input validation on user-facing forms'],
+      deploy:'Deployed and running in production at zstar25pro.com.',
+      results:'Live production application supporting real user traffic.',
+      github:'', live:'https://zstar25pro.com/'
+    },
+    triptastic:{
+      title:'Triptastic',
+      overview:'A travel/tour business website built to showcase packages and convert visitors into leads.',
+      problem:'The business needed a professional web presence with clear calls-to-action for bookings/enquiries.',
+      stack:['Responsive frontend','Contact/enquiry forms','Performance-optimized static assets'],
+      security:['HTTPS enforced','Form validation','No sensitive data stored client-side'],
+      deploy:'Live in production at triptastictour.co.in.',
+      results:'Live production site for a real tour operator.',
+      github:'', live:'https://triptastictour.co.in/'
+    },
+    giftcard:{
+      title:'Gift Card Platform',
+      overview:'A gift card ecommerce platform enabling browsing and purchase flows.',
+      problem:'Needed a clean, trustworthy purchase flow for a card-based product — trust and clarity matter for payment-adjacent products.',
+      stack:['Ecommerce frontend','Product catalog & checkout UI','Responsive design'],
+      security:['HTTPS in production','No card data handled/stored client-side','Input validation on checkout forms'],
+      deploy:'Live in production at 99giftcards.com.',
+      results:'Live, customer-facing production platform.',
+      github:'', live:'https://99giftcards.com/'
+    },
+    fantasy:{
+      title:'Fantasy App',
+      overview:'A fantasy-sports style application built as part of a full-stack engagement, covering both frontend and backend work.',
+      problem:'Needed an engaging, responsive app experience with backend support for user actions.',
+      stack:['Full-stack application','Backend API','Responsive UI'],
+      security:['Auth/session handling','Input validation','Environment-based secrets management'],
+      deploy:'Built and shipped as part of production work at Dayasara Entertainment.',
+      results:'Contributed core features to a shipped application.',
+      github:'', live:'https://zstar25pro.com/'
+    },
+    pos:{
+      title:'POS & Billing Software',
+      overview:'A point-of-sale and billing frontend for small-business transaction and invoicing workflows.',
+      problem:'Small businesses needed a simple, reliable interface for billing and transaction records.',
+      stack:['Frontend billing interface','Structured invoice/transaction views'],
+      security:['Input validation on transaction forms','No sensitive payment data stored client-side'],
+      deploy:'Source available on GitHub; frontend built for integration with a POS backend.',
+      results:'Functional POS/billing frontend ready for integration.',
+      github:'https://github.com/Aditya-0411/POS-and-Billing-frontend', live:''
+    },
+    cardata:{
+      title:'Car Data App',
+      overview:'A backend-focused application for managing structured car/vehicle data.',
+      problem:'Needed a reliable backend to store, query, and serve structured vehicle data.',
+      stack:['Backend service','Structured data models','REST-style endpoints'],
+      security:['Input validation','Structured error handling','Environment-based configuration'],
+      deploy:'Source available on GitHub.',
+      results:'Working backend service for vehicle data management.',
+      github:'https://github.com/Aditya-0411/CARPROJECT', live:''
+    },
+    stock:{
+      title:'Stock App',
+      overview:'A backend project for tracking stock/inventory-style data, built while working with a backend team.',
+      problem:'The team needed backend support for an ongoing stock-tracking product.',
+      stack:['Backend service','Data persistence layer','API endpoints'],
+      security:['Input validation','Structured access to data endpoints'],
+      deploy:'Source available on GitHub; built collaboratively with a backend team.',
+      results:'Contributed backend functionality to an ongoing stock project.',
+      github:'https://github.com/Aditya-0411/Stock-Project', live:''
+    },
+    orgmgmt:{
+      title:'Org-Management',
+      overview:'A generalized organization management system for organizations, teams, users, and repositories — similar in function to GitHub.',
+      problem:'Needed a system to manage nested organizational structures, user roles, and repository-like resources generically.',
+      stack:['Backend service','User & role management','Reporting and ticketing integration','Admin panel'],
+      security:['Role-based access considerations','Input validation','Structured admin controls'],
+      deploy:'Source available on GitHub.',
+      results:'Delivered user management, reporting, ticketing integration, and admin panel enhancements.',
+      github:'https://github.com/Aditya-0411/Organization-Management-System', live:''
+    }
+  };
+
+  var caseDetail = document.getElementById('caseDetail');
+  document.querySelectorAll('[data-case]').forEach(function(btn){
+    btn.addEventListener('click', function(e){
+      e.preventDefault();
+      var d = caseData[btn.dataset.case];
+      if(!d) return;
+      document.getElementById('caseTitle').textContent = d.title;
+      document.getElementById('caseOverview').textContent = d.overview;
+      document.getElementById('caseProblem').textContent = d.problem;
+      document.getElementById('caseStack').innerHTML = d.stack.map(function(s){ return '<li>'+s+'</li>'; }).join('');
+      document.getElementById('caseSecurity').innerHTML = d.security.map(function(s){ return '<li>'+s+'</li>'; }).join('');
+      document.getElementById('caseDeploy').textContent = d.deploy;
+      document.getElementById('caseResults').textContent = d.results;
+      var links = '';
+      if(d.live) links += '<a href="'+d.live+'" target="_blank">Live demo →</a>';
+      if(d.github) links += '<a href="'+d.github+'" target="_blank">GitHub →</a>';
+      document.getElementById('caseLinks').innerHTML = links;
+      caseDetail.classList.add('show');
+      caseDetail.scrollIntoView({behavior:'smooth', block:'start'});
+    });
+  });
+  document.getElementById('closeCase').addEventListener('click', function(){ caseDetail.classList.remove('show'); });
+
+  /* ================= CONTACT FORM ================= */
+  var form = document.querySelector('[data-form]');
+  var inputs = document.querySelectorAll('[data-form-input]');
+  var submitBtn = document.querySelector('[data-form-btn]');
+  function validate(){
+    var valid = true;
+    inputs.forEach(function(inp){ if(!inp.value.trim() || !inp.checkValidity()) valid = false; });
+    submitBtn.disabled = !valid;
+  }
+  inputs.forEach(function(inp){ inp.addEventListener('input', validate); });
+  if(form){
+    form.addEventListener('submit', function(e){
+      e.preventDefault();
+      submitBtn.innerHTML = '<span>Message sent ✓</span>';
+      submitBtn.disabled = true;
+      setTimeout(function(){
+        form.reset();
+        submitBtn.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 2L11 13M22 2l-7 20-4-9-9-4z"/></svg><span>Send message</span>';
+      }, 2400);
+    });
+  }
+})();
+</script>
 </body>
 </html>
